@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %} CD manager index {% endblock %}
+
+
+{% block body %}
+
+{{ form }}
+{{ msg }}
+
+{% for cd in all_cds %}
+{{ cd.name }}
+{{ cd.amount }}
+{% endfor %}
+
+{% endblock %}

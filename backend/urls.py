@@ -15,8 +15,8 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/', include('rest_framework.urls', namespace="rest_framework")),
     path('api/markets', views.MarketListView.as_view(), name='markets'),
+    path('api/market-detail/<str:uuid>', views.MarketDetailView.as_view(), name="market-detail"),
     path('', include('frontend.urls')),
 
-    # path('api/auth/', include('django.contrib.auth.urls')),
 
 ]

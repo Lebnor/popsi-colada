@@ -86,9 +86,9 @@ class NavBar extends Component {
                                 })
                             }
                             className={this.getLinkClass(2)}
-                            to="/users"
+                            to="/markets"
                         >
-                            Users
+                            Markets
                         </Link>
 
                         <Link

@@ -14,6 +14,7 @@ User = get_user_model()
 
 # Create your views here.
 
+
 def register_user(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
@@ -27,11 +28,19 @@ def register_user(request):
         form = CustomUserCreationForm()
     return render(request, 'backend/register.html', {'form': form})
 
+
 class MarketListView(generics.ListAPIView):
     queryset = Market.objects.all()
     serializer_class = MarketSerializer
-    permission_classes = [IsAuthenticated]
-        
+
+
+
+class MarketDetailView(generics.RetrieveAPIView):
+    def retrieve(self, request, uuid, *args, **kwargs):
+        market = Market.objects.get(uuid=uuid)
+        serializer = MarketSerializer(market, many=False)
+        return Response(serializer.data)
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

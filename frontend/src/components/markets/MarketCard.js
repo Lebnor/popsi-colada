@@ -13,13 +13,13 @@ class MarketCard extends Component {
 
     render() {
         return (
-            <a>
+            <React.Fragment>
                 <div
                     
                     className="card card-market has-text-centered mx-auto"
                 >
                     <div className="card-image">
-                        <figure className="image is-centered has-text-centered is-128x128">
+                        <figure className="image mx-auto is-128x128">
                             <img
                                 src={this.props.img}
                                 alt={`${this.props.name} image`}
@@ -41,7 +41,7 @@ class MarketCard extends Component {
                         <div className="content">{this.props.description}</div>
                     </div>
                 </div>
-            </a>
+            </React.Fragment>
         );
     }
 }

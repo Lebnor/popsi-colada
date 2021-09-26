@@ -1,72 +1,55 @@
 import React, { Component } from "react";
 import { getMarketsList } from "../utils";
-import ColumnView from "../ColumnView";
+import ColumnView from "./ColumnView";
 
 class MarketsMain extends Component {
     constructor(props) {
         super(props);
         this.state = {
             objects: [],
+            search: "",
         };
     }
-    
+
     // fetch list of supermarkets and update status
     componentDidMount() {
         getMarketsList((e) => this.setState({ objects: e }));
     }
 
-    getObjects() {
-        return [
-            { name: "name", img: "", description: "description" },
-            { name: "name", img: "", description: "description" },
-            { name: "name", img: "", description: "description" },
-            { name: "name", img: "", description: "description" },
-            { name: "name", img: "", description: "description" },
-            { name: "name", img: "", description: "description" },
-            { name: "name", img: "", description: "description" },
-        ];
-
-        // return (
-        //     <ul>
-        //         {this.state.objects &&
-        //             this.state.objects.map((item, ind) => {
-        //                 return (
-        //                     <li key={ind}>
-        //                         <div class="card">
-        //                             <div class="card-image">
-        //                                 <figure class="image is-4by3">
-        //                                     <img
-        //                                         src={item.img}
-        //                                         alt={`${item.name} image`}
-        //                                     />
-        //                                 </figure>
-        //                             </div>
-        //                             <div class="card-content">
-        //                                 <div class="media">
-        //                                     <div class="media-content">
-        //                                         {item.name}
-        //                                     </div>
-        //                                 </div>
-
-        //                                 <div class="content">
-        //                                     {item.description}
-        //                                 </div>
-        //                             </div>
-        //                         </div>
-        //                     </li>
-        //                 );
-        //             })}
-        //     </ul>
-        // );
-    }
     render() {
         return (
             <React.Fragment>
-                <div className="container">
-                    <h1 className="has-text-primary is-size-1">
-                        Supermakets List
-                    </h1>
-                    <ColumnView cols={4} objects={this.state.objects} />
+                <div className="container mt-4">
+                    <div className="columns is-align-items-center">
+                        <h1 className="has-text-primary is-size-3 column is-half">
+                            Supermarkets List{" "}
+                            <small>({this.state.objects.length} found)</small>
+                        </h1>
+                        <div className="field-label is-normal">
+                            <label className="label">Search:</label>
+                        </div>
+                        <div className="field-body">
+                            <div className="field">
+                                <p className="control is-expanded has-icons-left">
+                                    <input
+                                        className="input is-primary"
+                                        type="text"
+                                        placeholder="Name"
+                                        onChange={(e) =>
+                                            this.setState({
+                                                search: e.target.value,
+                                            })
+                                        }
+                                    />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <ColumnView
+                        cols={4}
+                        search={this.state.search}
+                        objects={this.state.objects}
+                    />
                 </div>
                 <div className="section"></div>
             </React.Fragment>

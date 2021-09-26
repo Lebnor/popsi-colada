@@ -9,6 +9,7 @@ import NavBar from "./nav/NavBar";
 import Register from "./Register";
 import Home from "./home/Home";
 import MarketsMain from "./markets/MarketsMain";
+import MarketDetail from "./markets/MarketDetail";
 class App extends Component {
     constructor(props) {
         super(props);
@@ -37,7 +38,7 @@ class App extends Component {
                                     loggedIn={this.props.loggedIn}
                                 />
                             </Route>
-                            <Route path="/users">
+                            <Route path="/markets">
                                 <NavBar
                                     activeInd={2}
                                     userdetails={this.props.userdetails}
@@ -47,6 +48,13 @@ class App extends Component {
                                     userdetails={this.props.userdetails}
                                     loggedIn={this.props.loggedIn}
                                 />
+                            </Route>
+                            <Route path="/market-detail/:uuid">
+                                <NavBar
+                                    userdetails={this.props.userdetails}
+                                    loggedIn={this.props.loggedIn}
+                                />
+                                <MarketDetail />
                             </Route>
                             <Route path="/">
                                 <NavBar
@@ -74,10 +82,9 @@ class App extends Component {
 const loggedIn = document.getElementById("app");
 const notLoggedIn = document.getElementById("app-not-authenticated");
 
-fetch("api/users/")
+fetch("/api/users/")
     .then((response) => response.json())
     .then((res) => {
-        console.log(res);
         render(<App userdetails={res} loggedIn={true} />, loggedIn);
     })
     .catch((err) => console.log(err));

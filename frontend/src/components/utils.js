@@ -80,6 +80,15 @@ function getList(search, callback) {
         });
 }
 
+export function retrieveMarket(uuid, callback) {
+    fetch(`/api/market-detail/${uuid}`)
+        .then((response) => response.json())
+        .then((data) => {
+            callback(data);
+        })
+        .catch((err) => callback(""));
+}
+
 export function deleteCd(id) {
     fetch(`api/cds/${id}`, {
         credentials: "include",

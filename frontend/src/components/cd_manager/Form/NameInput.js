@@ -4,6 +4,8 @@ import withValidation from "./withValidation";
 class NameInput extends Component {
 
     render() {
+
+        // property, when to change property
         const { cls, onChange } = this.props;
 
         return (

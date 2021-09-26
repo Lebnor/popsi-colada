@@ -1,12 +1,24 @@
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-from .models import Cd, User, Market
+from .models import Cd, User, Market, Food
+# , Stock
 
 
+class FoodSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Food
+        fields = '__all__'
+# class StockSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Stock
+#         fields = '__all__'
+    #     fields = ('food', 'price_per_unit', 'units',)
 class MarketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Market
-        fields = ('name', 'img', 'description')
+        fields = '__all__'
+        depth = 1
+
 class CdSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cd

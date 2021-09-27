@@ -5,6 +5,7 @@ import { createRecord } from "../../utils";
 import AmountInput from "../Form/AmountInput";
 import NameInput from "../Form/NameInput";
 import SubmitButton from "../Form/SubmitButton";
+import withSubmit from "../Form/withSubmit";
 
 class CreateRecord extends Component {
     constructor(props) {
@@ -79,23 +80,11 @@ class CreateRecord extends Component {
                                 active={
                                     this.state.nameVal && this.state.amountVal
                                 }
-                                onClick={(e) => this.handleOnSubmit(e)}
+                                // onClick={(e) => this.handleOnSubmit(e)}
+                                onClick={this.props.submit}
                             />
                         </div>
                     </form>
-
-                    {this.state.submitted && (
-                        <div className="appear notification is-success is-light level level-item">
-                            <button
-                                className="delete"
-                                onClick={() =>
-                                    this.setState({ submitted: false })
-                                }
-                            ></button>
-                            Submitted succesfully.
-                        </div>
-                    )}
-
 
                 </div>
             </section>
@@ -103,4 +92,4 @@ class CreateRecord extends Component {
     }
 }
 
-export default CreateRecord;
+export default withSubmit(CreateRecord, 'Record created successfully.');

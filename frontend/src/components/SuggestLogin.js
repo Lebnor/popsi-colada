@@ -7,9 +7,9 @@ class SuggestLogin extends Component {
             <div>
                 <p>
                     You need to
-                    <Link to="api/login"> Login </Link>
+                    <Link to="/api/login"> Login </Link>
                     or
-                    <Link to="api/register"> register </Link>
+                    <Link to="/api/register"> register </Link>
                     to view this page
                 </p>
             </div>

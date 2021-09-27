@@ -130,7 +130,7 @@ class NavBar extends Component {
 
                                 {!this.props.loggedIn && (
                                     <a
-                                        href="api/register"
+                                        href="/api/register"
                                         className="button is-success"
                                     >
                                         Register
@@ -139,7 +139,7 @@ class NavBar extends Component {
 
                                 {!this.props.loggedIn && (
                                     <a
-                                        href="api/login"
+                                        href="/api/login"
                                         className="button is-light"
                                     >
                                         {" "}
@@ -148,7 +148,7 @@ class NavBar extends Component {
                                 )}
                                 {this.props.loggedIn && (
                                     <a
-                                        href="api/logout"
+                                        href="/api/logout"
                                         className="button is-light"
                                     >
                                         {" "}

@@ -4,6 +4,7 @@ import MainTab from "./MainTab";
 import { getCdList } from "../../utils";
 import CreateRecord from "./CreateTab";
 import SearchTab from "./SearchTab";
+import NavBar from "../../nav/NavBar";
 
 class CdManagerPage extends Component {
     constructor(props) {
@@ -54,6 +55,10 @@ class CdManagerPage extends Component {
 
         return (
             <div>
+                <NavBar
+                    userdetails={this.props.userdetails}
+                    loggedIn={this.props.loggedIn}
+                />
                 <div className="">
                     <Tabs
                         updateActiveInd={(ind) => this.setActiveInd(ind)}
@@ -94,5 +99,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-
-export default CdManagerPage
+export default CdManagerPage;

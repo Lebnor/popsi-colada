@@ -1,14 +1,14 @@
 from django.shortcuts import redirect, render
-from rest_framework import viewsets, permissions, generics
+from rest_framework import views, viewsets, permissions, generics
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import action
 from django.contrib.auth import login
 from django.contrib.auth import get_user_model
 
 from .forms import CustomUserCreationForm
 
-from .models import Cd, Market
-from .serializers import CdSerializer, UserSerializer, MarketSerializer
+from .models import Cd, Food, Market
+from .serializers import CdSerializer, FoodSerializer, UserSerializer, MarketSerializer
 
 User = get_user_model()
 
@@ -27,6 +27,17 @@ def register_user(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'backend/register.html', {'form': form})
+
+class FoodViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Food.objects.all()
+        serializer = FoodSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        queryset = Food.objects.get(id=pk)
+        serializer = FoodSerializer(queryset, many=False)
+        return Response(serializer.data)
 
 
 class MarketListView(generics.ListAPIView):

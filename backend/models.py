@@ -20,16 +20,6 @@ class Food(models.Model):
     price_per_unit = models.PositiveIntegerField()
 
 
-# class Stock(models.Model):
-    # pass
-#     id = models.AutoField(primary_key=True)
-#     food = models.ForeignKey(Food, related_name='stocks', on_delete=CASCADE)
-#     price_per_unit = models.PositiveIntegerField()
-#     units = models.PositiveIntegerField()
-
-#     def __str__(self) -> str:
-#         return f'{self.food.name}, ${self.price_per_unit} per unit, {self.units} units left'
-
 
 class Market(models.Model):
     id = models.AutoField(primary_key=True)

@@ -10,6 +10,7 @@ const withSubmit = (WrappedComponent, message) => {
             };
         }
         render() {
+            
             return (
                 <div>
                     {this.state.submitted && (

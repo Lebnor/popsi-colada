@@ -14,7 +14,7 @@ class MarketDetail extends Component {
     }
     componentDidMount() {
         let urlArray = window.location.pathname.split("/");
-        // get last part
+        // get lasrt part
         let uuid = urlArray[urlArray.length - 1];
 
         retrieveMarket(uuid, (e) => this.setState({ market: e }));

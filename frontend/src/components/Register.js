@@ -23,30 +23,36 @@ class Register extends Component {
     }
     render() {
         return (
-            <div className="section">
-                <div className="columns">
-                    <form>
-                        <label htmlFor="name"> Enter Name:</label>
-                        <input
-                            onChange={(e) => this.inputChanged(e)}
-                            name="username"
-                            value={this.state.credentials.username}
-                        />
+            <div>
+                <NavBar
+                    userdetails={this.props.userdetails}
+                    loggedIn={this.props.loggedIn}
+                />
+                <div className="section">
+                    <div className="columns">
+                        <form>
+                            <label htmlFor="name"> Enter Name:</label>
+                            <input
+                                onChange={(e) => this.inputChanged(e)}
+                                name="username"
+                                value={this.state.credentials.username}
+                            />
 
-                        <label htmlFor="pw"> Enter Password:</label>
-                        <input
-                            onChange={(e) => this.inputChanged(e)}
-                            value={this.state.credentials.password}
-                            name="password"
-                            type="password"
-                            // id="pw"
-                        />
+                            <label htmlFor="pw"> Enter Password:</label>
+                            <input
+                                onChange={(e) => this.inputChanged(e)}
+                                value={this.state.credentials.password}
+                                name="password"
+                                type="password"
+                                // id="pw"
+                            />
 
-                        <input
-                            onClick={(e) => this.handleSubmit(e)}
-                            type="submit"
-                        />
-                    </form>
+                            <input
+                                onClick={(e) => this.handleSubmit(e)}
+                                type="submit"
+                            />
+                        </form>
+                    </div>
                 </div>
             </div>
         );

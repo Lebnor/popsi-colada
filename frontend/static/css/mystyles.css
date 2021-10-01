@@ -6,6 +6,9 @@
   background-size: 40vw 40vw, auto;
   background-position: left 80% top 0, top 0 left 0; }
 
+html {
+  scroll-behavior: smooth; }
+
 .nav-item {
   align-self: center; }
 
@@ -46,11 +49,20 @@ nav {
 .home-search-input:focus {
   outline: 0; }
 
-.home-search > button {
+.home-search-button {
+  text-align: center;
   border-top-left-radius: 4rem;
-  width: 8rem;
+  width: 10rem;
   border-top: 25%;
-  border-left: 50%; }
+  border-left: 50%;
+  color: white;
+  font-size: 2rem;
+  font-family: "Nunito", sans-serif;
+  background-color: #fe043c; }
+
+.home-search-button:hover {
+  color: white;
+  filter: brightness(1.25); }
 
 .column {
   display: inline; }
@@ -83,7 +95,7 @@ nav {
   column-count: 4; }
 
 .card-market {
-  width: 225px;
+  width: 15vw;
   height: 325px; }
 
 @media only screen and (max-width: 768px) {
@@ -98,8 +110,8 @@ nav {
   .card-market {
     width: 90%;
     height: 325px; }
-  .home-search > button {
-    width: 5rem; }
+  .home-search-button {
+    width: 6rem; }
   .hero-main {
     font-size: 4rem;
     font-weight: 900;
@@ -176,8 +188,9 @@ header {
 body {
   position: relative;
   min-height: 100vh;
-  padding-bottom: 3rem;
-  margin-bottom: 3rem; }
+  padding-bottom: 100px;
+  margin-bottom: 100px;
+  scroll-behavior: smooth; }
 
 footer {
   width: 100vw;
@@ -185,8 +198,8 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
-  margin-top: 3rem;
-  padding-top: 3rem; }
+  margin-top: 6rem;
+  padding-top: 6rem; }
 
 /*! bulma.io v0.9.3 | MIT License | github.com/jgthms/bulma */
 /* Bulma Utilities */
@@ -1432,7 +1445,7 @@ a.box:active {
   .button.is-static {
     background-color: whitesmoke;
     border-color: #dbdbdb;
-    color: #7a7a7a;
+    color: #707070;
     box-shadow: none;
     pointer-events: none; }
   .button.is-rounded {
@@ -2369,31 +2382,31 @@ a.tag:hover {
     background-color: whitesmoke;
     border-color: whitesmoke;
     box-shadow: none;
-    color: #7a7a7a; }
+    color: #707070; }
     .input[disabled]::-moz-placeholder, .textarea[disabled]::-moz-placeholder, .select select[disabled]::-moz-placeholder,
     fieldset[disabled] .input::-moz-placeholder,
     fieldset[disabled] .textarea::-moz-placeholder,
     fieldset[disabled] .select select::-moz-placeholder,
     .select fieldset[disabled] select::-moz-placeholder {
-      color: rgba(122, 122, 122, 0.3); }
+      color: rgba(112, 112, 112, 0.3); }
     .input[disabled]::-webkit-input-placeholder, .textarea[disabled]::-webkit-input-placeholder, .select select[disabled]::-webkit-input-placeholder,
     fieldset[disabled] .input::-webkit-input-placeholder,
     fieldset[disabled] .textarea::-webkit-input-placeholder,
     fieldset[disabled] .select select::-webkit-input-placeholder,
     .select fieldset[disabled] select::-webkit-input-placeholder {
-      color: rgba(122, 122, 122, 0.3); }
+      color: rgba(112, 112, 112, 0.3); }
     .input[disabled]:-moz-placeholder, .textarea[disabled]:-moz-placeholder, .select select[disabled]:-moz-placeholder,
     fieldset[disabled] .input:-moz-placeholder,
     fieldset[disabled] .textarea:-moz-placeholder,
     fieldset[disabled] .select select:-moz-placeholder,
     .select fieldset[disabled] select:-moz-placeholder {
-      color: rgba(122, 122, 122, 0.3); }
+      color: rgba(112, 112, 112, 0.3); }
     .input[disabled]:-ms-input-placeholder, .textarea[disabled]:-ms-input-placeholder, .select select[disabled]:-ms-input-placeholder,
     fieldset[disabled] .input:-ms-input-placeholder,
     fieldset[disabled] .textarea:-ms-input-placeholder,
     fieldset[disabled] .select select:-ms-input-placeholder,
     .select fieldset[disabled] select:-ms-input-placeholder {
-      color: rgba(122, 122, 122, 0.3); }
+      color: rgba(112, 112, 112, 0.3); }
 
 .input, .textarea {
   box-shadow: none;
@@ -2495,7 +2508,7 @@ a.tag:hover {
   fieldset[disabled] .radio,
   .checkbox input[disabled],
   .radio input[disabled] {
-    color: #7a7a7a;
+    color: #707070;
     cursor: not-allowed; }
 
 .radio + .radio {
@@ -2623,7 +2636,7 @@ a.tag:hover {
   .select.is-large {
     font-size: 1.5rem; }
   .select.is-disabled::after {
-    border-color: #7a7a7a; }
+    border-color: #707070; }
   .select.is-fullwidth {
     width: 100%; }
     .select.is-fullwidth select {
@@ -3494,7 +3507,7 @@ button.dropdown-item {
     padding-left: 0.75em; }
 
 .menu-label {
-  color: #7a7a7a;
+  color: #707070;
   font-size: 0.75em;
   letter-spacing: 0.1em;
   text-transform: uppercase; }
@@ -4557,7 +4570,7 @@ a.navbar-item,
     background-color: #dbdbdb;
     border-color: #dbdbdb;
     box-shadow: none;
-    color: #7a7a7a;
+    color: #707070;
     opacity: 0.5; }
 
 .pagination-previous,
@@ -4772,7 +4785,7 @@ label.panel-block {
   text-align: center;
   vertical-align: top;
   width: 1em;
-  color: #7a7a7a;
+  color: #707070;
   margin-right: 0.75em; }
   .panel-icon .fa {
     font-size: inherit;
@@ -6104,10 +6117,10 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   background-color: #757763 !important; }
 
 .has-text-grey {
-  color: #7a7a7a !important; }
+  color: #707070 !important; }
 
 .has-background-grey {
-  background-color: #7a7a7a !important; }
+  background-color: #707070 !important; }
 
 .has-text-grey-light {
   color: #d0d1cd !important; }

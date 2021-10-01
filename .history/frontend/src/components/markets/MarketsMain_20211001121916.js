@@ -78,7 +78,8 @@ class MarketsMain extends Component {
                         ))}
                     />
 
-                
+                   
+                   <FoodsView />
 
                 </div>
                 <div className="section"></div>

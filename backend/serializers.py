@@ -8,11 +8,7 @@ class FoodSerializer(serializers.ModelSerializer):
     class Meta:
         model = Food
         fields = '__all__'
-# class StockSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Stock
-#         fields = '__all__'
-    #     fields = ('food', 'price_per_unit', 'units',)
+        
 class MarketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Market

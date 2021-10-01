@@ -7,6 +7,7 @@ urlpatterns = [
     path('about', index),
     path('markets', index),
     path('market-detail/<str:uuid>', market_detail),
+    path('markets:search', index),
     path('cds', index),
   
 ]

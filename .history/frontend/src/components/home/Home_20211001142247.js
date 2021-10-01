@@ -6,7 +6,7 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            search: '',
+            search: "",
         };
     }
     render() {
@@ -52,7 +52,7 @@ class Home extends Component {
                     </div>
                 </div>
 
-                <div className="section"></div>
+                <div id="x123" className="section"></div>
             </React.Fragment>
         );
     }

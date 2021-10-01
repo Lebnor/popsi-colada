@@ -21,7 +21,7 @@ const withSubmit = (WrappedComponent, message) => {
                                 }
                             />
                         )}
-                        {...this.props}
+                        loggedIn={this.props.loggedIn}
                         submitted={this.state.submitted}
                         submit={() => this.setState({ submitted: true })}
                     />

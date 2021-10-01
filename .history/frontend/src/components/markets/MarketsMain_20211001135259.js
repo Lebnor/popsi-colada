@@ -10,7 +10,7 @@ class MarketsMain extends Component {
         super(props);
         this.state = {
             objects: [],
-            search: history.state.state ? history.state.state.uSearch : '',
+            search: this.props.location.userSearch || "",
         };
     }
     validObjects() {

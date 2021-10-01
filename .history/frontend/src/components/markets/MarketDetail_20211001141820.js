@@ -27,7 +27,7 @@ class MarketDetail extends Component {
                     userdetails={this.props.userdetails}
                     loggedIn={this.props.loggedIn}
                 />
-                {this.props.notification}
+                {this.props.notification()}
                 <div className="section">
                     <div className="container section box">
                         <div className="columns">

@@ -6,7 +6,7 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            search: '',
+            search: history.state.state.uSearch || '',
         };
     }
     render() {

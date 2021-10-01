@@ -42,7 +42,7 @@ class CreateRecord extends Component {
 
         return (
             <section className="px-5">
-                {this.props.notification}
+                {/* {this.props.notification} */}
                 <div className="box">
                     <form
                         onSubmit={(e) => {

@@ -6,7 +6,7 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            search: '',
+            search: "",
         };
     }
     render() {
@@ -32,14 +32,13 @@ class Home extends Component {
                                         })
                                     }
                                     value={this.state.search}
-                                    placeholder="Search a market"
+                                    placeholder="Search market, Food"
                                     className="home-search-input level-item"
                                 ></input>
 
                                 <NavLink
                                     to={{
                                         pathname: `/markets`,
-                                        state:{uSearch: this.state.search},
                                         userSearch: this.state.search,
                                     }}
                                     isActive={() => true}
@@ -52,7 +51,7 @@ class Home extends Component {
                     </div>
                 </div>
 
-                <div className="section"></div>
+                <div id="x123" className="section"></div>
             </React.Fragment>
         );
     }

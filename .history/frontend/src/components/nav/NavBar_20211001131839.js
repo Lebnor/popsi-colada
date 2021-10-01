@@ -78,7 +78,7 @@ class NavBar extends Component {
                                     activeInd: 2,
                                 })
                             }
-                            className={this.getLinkClass("market")}
+                            className={this.getLinkClass("markets")}
                             to="/markets"
                         >
                             Markets

@@ -78,7 +78,7 @@ class NavBar extends Component {
                                     activeInd: 2,
                                 })
                             }
-                            className={this.getLinkClass("market")}
+                            className={this.getLinkClass("markets")}
                             to="/markets"
                         >
                             Markets
@@ -100,7 +100,7 @@ class NavBar extends Component {
                     <div className="column is-offset-5 navbar-end">
                         <div className="navbar-item">
                             <div className="buttons is-justify-content-center">
-                                <ProfileIcon {...this.props} />
+                                <ProfileIcon />
 
                                 {!this.props.loggedIn && (
                                     <a

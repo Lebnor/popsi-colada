@@ -16,7 +16,7 @@ class ProfileIcon extends Component {
                     <div>
                         {"    "}
                         {this.props.userdetails &&
-                            this.props.userdetails}
+                            this.props.userdetails.username}
                     </div>
                 </div>
             </div>

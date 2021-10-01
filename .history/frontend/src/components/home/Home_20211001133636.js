@@ -6,7 +6,7 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            search: '',
+            search: "",
         };
     }
     render() {
@@ -39,9 +39,8 @@ class Home extends Component {
                                 <NavLink
                                     to={{
                                         pathname: `/markets`,
-                                        state:{uSearch: this.state.search},
                                         userSearch: this.state.search,
-                                    }}
+                                    }, {u:'u'}}
                                     isActive={() => true}
                                     activeClassName="home-search-button"
                                 >
@@ -52,7 +51,7 @@ class Home extends Component {
                     </div>
                 </div>
 
-                <div className="section"></div>
+                <div id="x123" className="section"></div>
             </React.Fragment>
         );
     }

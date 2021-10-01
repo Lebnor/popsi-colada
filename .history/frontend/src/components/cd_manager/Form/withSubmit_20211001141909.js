@@ -12,6 +12,12 @@ const withSubmit = (WrappedComponent, message) => {
         render() {
             return (
                 <div>
+                    {this.state.submitted && (
+                        <Notification
+                            message={message}
+                            onClick={() => this.setState({ submitted: false })}
+                        />
+                    )}
                     <WrappedComponent
                         notification={this.state.submitted && (
                             <Notification
@@ -21,7 +27,7 @@ const withSubmit = (WrappedComponent, message) => {
                                 }
                             />
                         )}
-                        {...this.props}
+                        loggedIn={this.props.loggedIn}
                         submitted={this.state.submitted}
                         submit={() => this.setState({ submitted: true })}
                     />

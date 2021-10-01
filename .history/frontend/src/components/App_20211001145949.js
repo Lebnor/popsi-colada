@@ -29,9 +29,9 @@ class App extends Component {
                         </Route>
                         <Route
                             path="/markets"
-                            // render={() => <MarketsMain {...this.props} />}
+                            render={() => <MarketsMain {...this.props} />}
                         >
-                            <MarketsMain value={this.props.value} {...this.props} />
+                            {/* <MarketsMain value={this.props.value} {...this.props} /> */}
                         </Route>
                         <Route path="/markets/:search">
                             <MarketsMain {...this.props} />

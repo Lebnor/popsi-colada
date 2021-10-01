@@ -1,18 +1,7 @@
 import React, { Component } from "react";
-import { register } from "../utils";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    Redirect,
-    NavLink,
-} from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
-import { AiOutlineUser } from "react-icons/ai";
+import { Link } from "react-router-dom";
 import ProfileIcon from "./ProfileIcon";
+import { AiOutlineUser } from "react-icons/ai";
 
 class NavBar extends Component {
     constructor(props) {
@@ -25,10 +14,14 @@ class NavBar extends Component {
 
     getLinkClass(ind) {
         let linkClass = "navbar-item ";
-        if (ind === this.state.activeInd) {
-            linkClass += " active is-active";
+        if (ind === "" && window.location.pathname === "/") {
+            linkClass += " is-active";
         }
-        "Class for this elem is " + linkClass;
+
+        if ( ind !== '' && window.location.pathname.startsWith(`/${ind}`)) {
+            linkClass += " is-active";
+        }
+
         return linkClass;
     }
 
@@ -74,7 +67,7 @@ class NavBar extends Component {
                                     activeInd: 0,
                                 })
                             }
-                            className={this.getLinkClass(0)}
+                            className={this.getLinkClass("")}
                             to="/"
                         >
                             Home
@@ -85,7 +78,7 @@ class NavBar extends Component {
                                     activeInd: 2,
                                 })
                             }
-                            className={this.getLinkClass(2)}
+                            className={this.getLinkClass("markets")}
                             to="/markets"
                         >
                             Markets
@@ -97,7 +90,7 @@ class NavBar extends Component {
                                     activeInd: 1,
                                 })
                             }
-                            className={this.getLinkClass(1)}
+                            className={this.getLinkClass("cds")}
                             to="/cds"
                         >
                             CD's
@@ -107,26 +100,7 @@ class NavBar extends Component {
                     <div className="column is-offset-5 navbar-end">
                         <div className="navbar-item">
                             <div className="buttons is-justify-content-center">
-                                {/* <ProfileIcon /> */}
-                                <div className="prof-icon dropdown">
-                                    <div
-                                        className="mb-2 mx-4 nav-list is-align-items-center has-text-white dropdown-trigger"
-                                        aria-haspopup="true"
-                                        aria-controls="dropdown-menu2"
-                                    >
-                                        <div className="icon-container">
-                                            <AiOutlineUser
-                                                color="black"
-                                                size="32"
-                                            />
-                                        </div>
-                                        <div>
-                                            {"    "}
-                                            {this.props.userdetails &&
-                                                this.props.userdetails.username}
-                                        </div>
-                                    </div>
-                                </div>
+                                <ProfileIcon />
 
                                 {!this.props.loggedIn && (
                                     <a

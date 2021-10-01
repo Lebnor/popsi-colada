@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { retrieveMarket } from "../utils";
 import Food from "./Food";
 import withSubmit from "../cd_manager/Form/withSubmit";
+import NavBar from "../nav/NavBar";
 class MarketDetail extends Component {
     constructor(props) {
         super(props);
@@ -21,57 +22,68 @@ class MarketDetail extends Component {
 
     render() {
         return (
-            <div className="section">
-                <div className="container section box">
-                    <div className="columns">
-                        <p className="column auto">
-                            Shopping at{" "}
-                            <strong className="is-primary">
-                                {this.state.market.name}
-                            </strong>{" "}
-                        </p>
-                        <p className="column is-offset-2">
-                            Total:{" "}
-                            <strong className="is-primary">
-                                {" "}
-                                ${this.state.total}
-                            </strong>
-                        </p>
-                        <div className="column auto field level-right">
-                            <label> Search: </label>
-                            <input className="is-info" type="text"></input>
+            <div>
+                <NavBar
+                    userdetails={this.props.userdetails}
+                    loggedIn={this.props.loggedIn}
+                />
+                <div className="section">
+                    <div className="container section box">
+                        <div className="columns">
+                            <p className="column auto">
+                                Shopping at{" "}
+                                <strong className="is-primary">
+                                    {this.state.market.name}
+                                </strong>{" "}
+                            </p>
+                            <p className="column is-offset-2">
+                                Total:{" "}
+                                <strong className="is-primary">
+                                    {" "}
+                                    ${this.state.total}
+                                </strong>
+                            </p>
+                            <div className="column auto field level-right">
+                                <label> Search: </label>
+                                <input className="is-info" type="text"></input>
+                            </div>
                         </div>
+                        <ul>
+                            {this.state.market &&
+                                this.state.market.foods.map((item, ind) => {
+                                    return (
+                                        <li key={ind}>
+                                            <Food
+                                                food={item}
+                                                callback={(minusplus) =>
+                                                    this.setState({
+                                                        total: Math.max(
+                                                            0,
+                                                            this.state.total +
+                                                                item.price_per_unit *
+                                                                    minusplus
+                                                        ),
+                                                    })
+                                                }
+                                            />
+                                        </li>
+                                    );
+                                })}
+                        </ul>
                     </div>
-                    <ul>
-                        {this.state.market &&
-                            this.state.market.foods.map((item, ind) => {
-                                return (
-                                    <li key={ind}>
-                                        <Food
-                                            food={item}
-                                            callback={(minusplus) =>
-                                                this.setState({
-                                                    total: Math.max(
-                                                        0,
-                                                        this.state.total +
-                                                            item.price_per_unit *
-                                                                minusplus
-                                                    ),
-                                                })
-                                            }
-                                        />
-                                    </li>
-                                );
-                            })}
-                    </ul>
-                </div>
 
-                <div className="level level-item">
-                    <button onClick={this.props.submit} className="button is-success">PURCHASE</button>
+                    <div className="level level-item">
+                        <button
+                            onClick={this.props.submit}
+                            className="button is-success"
+                        >
+                            PURCHASE
+                        </button>
+                    </div>
                 </div>
             </div>
         );
     }
 }
 
-export default withSubmit(MarketDetail, 'Thank you for buying');
+export default withSubmit(MarketDetail, "Thank you for buying");

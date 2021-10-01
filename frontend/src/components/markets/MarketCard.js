@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class MarketCard extends Component {
     sizeClass(name) {
@@ -14,33 +15,34 @@ class MarketCard extends Component {
     render() {
         return (
             <React.Fragment>
-                <div
-                    
-                    className="card card-market has-text-centered mx-auto"
-                >
-                    <div className="card-image">
-                        <figure className="image mx-auto is-128x128">
-                            <img
-                                src={this.props.img}
-                                alt={`${this.props.name} image`}
-                            />
-                        </figure>
-                    </div>
-                    <div className="card-content">
-                        <div className="media">
-                            <div
-                                className={
-                                    "has-text-primary media-content " +
-                                    this.sizeClass(this.props.name)
-                                }
-                            >
-                                {this.adjustSize(this.props.name)}
+                <Link to={`/market-detail/${this.props.uuid}`}>
+                    <div className="card card-market has-text-centered mx-auto">
+                        <div className="card-image">
+                            <figure className="image mx-auto is-128x128">
+                                <img
+                                    src={this.props.img}
+                                    alt={`${this.props.name} image`}
+                                />
+                            </figure>
+                        </div>
+                        <div className="card-content">
+                            <div className="media">
+                                <div
+                                    className={
+                                        "has-text-primary media-content " +
+                                        this.sizeClass(this.props.name)
+                                    }
+                                >
+                                    {this.adjustSize(this.props.name)}
+                                </div>
+                            </div>
+
+                            <div className="content">
+                                {this.props.description}
                             </div>
                         </div>
-
-                        <div className="content">{this.props.description}</div>
                     </div>
-                </div>
+                </Link>
             </React.Fragment>
         );
     }

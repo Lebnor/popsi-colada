@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import CdManagerPage from "./cd_manager/cds/CdManagerPage";
 import Footer from "./Footer";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 import NavBar from "./nav/NavBar";
 import Register from "./Register";
 import Home from "./home/Home";
@@ -18,62 +18,40 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Router>
-                    <div>
-                        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-                        <Switch>
-                            <Route path="/register">
-                                <Register />
-                            </Route>
-                            <Route path="/cds">
-                                <NavBar
-                                    activeInd={1}
-                                    userdetails={this.props.userdetails}
-                                    loggedIn={this.props.loggedIn}
-                                />
-
-                                <CdManagerPage
-                                    userdetails={this.props.userdetails}
-                                    loggedIn={this.props.loggedIn}
-                                />
-                            </Route>
-                            <Route path="/markets">
-                                <NavBar
-                                    activeInd={2}
-                                    userdetails={this.props.userdetails}
-                                    loggedIn={this.props.loggedIn}
-                                />
-                                <MarketsMain
-                                    userdetails={this.props.userdetails}
-                                    loggedIn={this.props.loggedIn}
-                                />
-                            </Route>
-                            <Route path="/market-detail/:uuid">
-                                <NavBar
-                                    userdetails={this.props.userdetails}
-                                    loggedIn={this.props.loggedIn}
-                                />
-                                <MarketDetail />
-                            </Route>
-                            <Route path="/">
-                                <NavBar
-                                    activeInd={0}
-                                    userdetails={this.props.userdetails}
-                                    loggedIn={this.props.loggedIn}
-                                />
-
-                                <Home />
-                            </Route>
-                        </Switch>
-                    </div>
+                <BrowserRouter>
+                    <Route path="/register" component={Register}></Route>
+                    <Route path="/cds">
+                        <CdManagerPage
+                            userdetails={this.props.userdetails}
+                            loggedIn={this.props.loggedIn}
+                        />
+                    </Route>
+                    <Route
+                        path="/markets"
+                        props={{ ...this.props }}
+                        render={() => <MarketsMain {...this.props} />}
+                    ></Route>
+                    <Route path="/markets/:search" component={MarketsMain} />
+                    <Route
+                        path="/market-detail/:uuid"
+                        render={() => <MarketDetail />}
+                    >
+                        {/* <MarketDetail /> */}
+                    </Route>
+                    <Route
+                        exact
+                        path="/"
+                        render={() => <Home {...this.props} />}
+                    ></Route>
+                    {/* </Switch>
+                    </div> */}
 
                     <Footer
                         className="section"
                         footer-color="false"
                         footer-padding="6rem"
                     />
-                </Router>
+                </BrowserRouter>
             </div>
         );
     }

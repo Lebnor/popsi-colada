@@ -1,17 +1,31 @@
 import React, { Component } from "react";
 import { getMarketsList } from "../utils";
 import ColumnView from "./ColumnView";
+import NavBar from "../nav/NavBar";
+import MarketCard from "./MarketCard";
+import FoodsView from "./FoodsView";
 
 class MarketsMain extends Component {
     constructor(props) {
         super(props);
         this.state = {
             objects: [],
+            // search: this.props.location.userSearch || "",
             search: "",
         };
     }
-
-    // fetch list of supermarkets and update status
+    validObjects() {
+        let validObs = [];
+        this.state.objects.map((item) => {
+            if (
+                item.name.includes(this.state.search) ||
+                item.description.includes(this.state.search)
+            )
+                validObs.push(item);
+        });
+        return validObs;
+    }
+    // fetch list of supermarkets
     componentDidMount() {
         getMarketsList((e) => this.setState({ objects: e }));
     }
@@ -19,11 +33,15 @@ class MarketsMain extends Component {
     render() {
         return (
             <React.Fragment>
+                <NavBar
+                    userdetails={this.props.userdetails}
+                    loggedIn={this.props.loggedIn}
+                />
                 <div className="container mt-4">
                     <div className="columns is-align-items-center">
                         <h1 className="has-text-primary is-size-3 column is-half">
                             Supermarkets List{" "}
-                            <small>({this.state.objects.length} found)</small>
+                            <small>({this.validObjects().length} found)</small>
                         </h1>
                         <div className="field-label is-normal">
                             <label className="label">Search:</label>
@@ -34,7 +52,8 @@ class MarketsMain extends Component {
                                     <input
                                         className="input is-primary"
                                         type="text"
-                                        placeholder="Name"
+                                        placeholder="name"
+                                        value={this.state.search}
                                         onChange={(e) =>
                                             this.setState({
                                                 search: e.target.value,
@@ -45,11 +64,23 @@ class MarketsMain extends Component {
                             </div>
                         </div>
                     </div>
+
                     <ColumnView
                         cols={4}
                         search={this.state.search}
-                        objects={this.state.objects}
+                        objects={this.validObjects().map((item) => (
+                            <MarketCard
+                                name={item.name}
+                                description={item.description}
+                                img={item.img}
+                                uuid={item.uuid}
+                            />
+                        ))}
                     />
+
+                   
+                   <FoodsView />
+
                 </div>
                 <div className="section"></div>
             </React.Fragment>

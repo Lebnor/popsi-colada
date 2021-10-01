@@ -9,17 +9,7 @@ class ColumnView extends Component {
             search: this.props.search,
         };
     }
-    validObjects() {
-        let validObs = [];
-        this.props.objects.map((item) => {
-            if (
-                item.name.includes(this.props.search) ||
-                item.description.includes(this.props.search)
-            )
-                validObs.push(item);
-        });
-        return validObs;
-    }
+
     render() {
         return (
             <div className="columns">
@@ -27,22 +17,9 @@ class ColumnView extends Component {
                     <div key={colInd} className="column auto">
                         <ul className="">
                             {this.props.objects &&
-                                this.validObjects().map((item, ind) => (
+                                this.props.objects.map((item, ind) => (
                                     <li className="my-4" key={ind}>
-                                        <Link
-                                            to={`market-detail/${item.uuid}`}
-                                        >
-                                            {ind % 4 === colInd && (
-                                                <MarketCard
-                                                    img_field={item.img_field}
-                                                    name={item.name}
-                                                    description={
-                                                        item.description
-                                                    }
-                                                    img={item.img}
-                                                />
-                                            )}
-                                        </Link>
+                                        {ind % 4 === colInd && item}
                                     </li>
                                 ))}
                         </ul>

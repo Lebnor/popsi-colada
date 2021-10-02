@@ -59,7 +59,10 @@ class MarketDetail extends Component {
     render() {
         return (
             <div>
-
+                <NavBar
+                    userdetails={this.props.userdetails}
+                    loggedIn={this.props.loggedIn}
+                />
                 {this.props.notification}
                 <div className="section">
                     <div className="container section box">
@@ -115,10 +118,10 @@ class MarketDetail extends Component {
                             onClick={() => {
                                 this.props.submit();
                                 this.setState({ total: 0, foods: this.getFoodsList() });
-                                // this.state.foods.forEach((element) => {
-                                    // console.log(element);
-                                    // element.setAmount(0);
-                                // });
+                                this.state.foods.forEach((element) => {
+                                    console.log(element);
+                                    element.setAmount(0);
+                                });
                             }}
                             className="button is-success"
                         >

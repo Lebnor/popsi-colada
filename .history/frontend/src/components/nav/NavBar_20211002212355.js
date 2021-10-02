@@ -10,8 +10,6 @@ class NavBar extends Component {
         this.state = {
             activeInd: this.props.activeInd,
         };
-
-       
     }
 
     getLinkClass(ind) {
@@ -20,7 +18,7 @@ class NavBar extends Component {
             linkClass += " is-active";
         }
 
-        if (ind !== "" && window.location.pathname.startsWith(`/${ind}`)) {
+        if ( ind !== '' && window.location.pathname.startsWith(`/${ind}`)) {
             linkClass += " is-active";
         }
 

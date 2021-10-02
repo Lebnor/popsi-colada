@@ -55,6 +55,10 @@ class CdManagerPage extends Component {
 
         return (
             <div>
+                <NavBar
+                    userdetails={this.props.userdetails}
+                    loggedIn={this.props.loggedIn}
+                />
                 <div className="">
                     <Tabs
                         updateActiveInd={(ind) => this.setActiveInd(ind)}

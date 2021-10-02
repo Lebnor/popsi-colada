@@ -7,11 +7,6 @@ class Food extends Component {
             amount: 0,
         };
     }
-
-    setAmount(amount) {
-        this.setState({amount: amount})
-    }
-
     updateAmount(increment) {
         if (this.state.amount + increment >= 0) {
             this.setState({

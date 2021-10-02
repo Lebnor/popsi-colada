@@ -7,11 +7,6 @@ class Food extends Component {
             amount: 0,
         };
     }
-
-    setAmount(amount) {
-        this.setState({amount: amount})
-    }
-
     updateAmount(increment) {
         if (this.state.amount + increment >= 0) {
             this.setState({
@@ -22,12 +17,11 @@ class Food extends Component {
         }
     }
     render() {
-        const { name, price_per_unit } = this.props
         return (
             <div className="level border">
                 <p>
-                    <strong>{name}</strong>, $
-                    {price_per_unit} per unit
+                    <strong>{this.props.food.name}</strong>, $
+                    {this.props.food.price_per_unit} per unit
                 </p>
                 <div className="level-right buttons">
                     <p className="level-item"> x {this.state.amount} </p>

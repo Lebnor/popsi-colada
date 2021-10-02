@@ -19,25 +19,13 @@ class MarketDetail extends Component {
         let uuid = urlArray[urlArray.length - 1];
         retrieveMarket(uuid, (e) => this.setState({
             market: e,
-            foods: e.foods.map((item) => (
-                <Food
-                    callback={(minusplus) =>
-                        this.setState({
-                            total: Math.max(
-                                0,
-                                this.state.total +
-                                    item.price_per_unit * minusplus
-                            ),
-                        })
-                    }
-                    {...item}
-                />
-            )),
-        }));
+            foods: this.getFoodsList()
+        
+        }))
 
     }
     getFoodsList() {
-        return this.state.market.foods.map((item) => (
+        return this.state.market.map((item) => (
             <Food
                 callback={(minusplus) =>
                     this.setState({
@@ -59,7 +47,10 @@ class MarketDetail extends Component {
     render() {
         return (
             <div>
-
+                <NavBar
+                    userdetails={this.props.userdetails}
+                    loggedIn={this.props.loggedIn}
+                />
                 {this.props.notification}
                 <div className="section">
                     <div className="container section box">

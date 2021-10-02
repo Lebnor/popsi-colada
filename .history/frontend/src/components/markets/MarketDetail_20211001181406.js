@@ -59,7 +59,10 @@ class MarketDetail extends Component {
     render() {
         return (
             <div>
-
+                <NavBar
+                    userdetails={this.props.userdetails}
+                    loggedIn={this.props.loggedIn}
+                />
                 {this.props.notification}
                 <div className="section">
                     <div className="container section box">

@@ -10,56 +10,46 @@ class MarketDetail extends Component {
             uuid: "",
             market: "",
             total: 0,
-            foods: false,
         };
     }
     componentDidMount() {
         let urlArray = window.location.pathname.split("/");
         // get last part
         let uuid = urlArray[urlArray.length - 1];
-        retrieveMarket(uuid, (e) => this.setState({
-            market: e,
-            foods: e.foods.map((item) => (
-                <Food
-                    callback={(minusplus) =>
-                        this.setState({
-                            total: Math.max(
-                                0,
-                                this.state.total +
-                                    item.price_per_unit * minusplus
-                            ),
-                        })
-                    }
-                    {...item}
-                />
-            )),
-        }));
 
+        retrieveMarket(uuid, (e) => this.setState({ market: e }));
+
+        this.setState({
+            foods:
+                this.state.market &&
+                this.state.market.foods.map((item, ind) => {
+                    return (
+                        // <li key={ind}>
+                        <Food
+                            food={item}
+                            callback={(minusplus) =>
+                                this.setState({
+                                    total: Math.max(
+                                        0,
+                                        this.state.total +
+                                            item.price_per_unit * minusplus
+                                    ),
+                                })
+                            }
+                        />
+                        // </li>
+                    );
+                }),
+        });
     }
-    getFoodsList() {
-        return this.state.market.foods.map((item) => (
-            <Food
-                callback={(minusplus) =>
-                    this.setState({
-                        total: Math.max(
-                            0,
-                            this.state.total +
-                                item.price_per_unit * minusplus
-                        ),
-                    })
-                }
-                {...item}
-                />
-            ));
-    }
- 
-    
-    
 
     render() {
         return (
             <div>
-
+                <NavBar
+                    userdetails={this.props.userdetails}
+                    loggedIn={this.props.loggedIn}
+                />
                 {this.props.notification}
                 <div className="section">
                     <div className="container section box">
@@ -83,10 +73,7 @@ class MarketDetail extends Component {
                             </div>
                         </div>
                         <ul>
-                            {this.state.foods &&
-                                this.state.foods.map((item) => (
-                                    <li key={item.ind}> {item} </li>
-                                ))}
+                            {this.state.foods}
                             {/* {this.state.market &&
                                 this.state.market.foods.map((item, ind) => {
                                     return (
@@ -114,11 +101,11 @@ class MarketDetail extends Component {
                         <button
                             onClick={() => {
                                 this.props.submit();
-                                this.setState({ total: 0, foods: this.getFoodsList() });
-                                // this.state.foods.forEach((element) => {
-                                    // console.log(element);
-                                    // element.setAmount(0);
-                                // });
+                                this.setState({ total: 0 });
+                                this.state.foods.forEach((element) => {
+                                    console.log(element);
+                                    element.setState({ amount: 0 });
+                                });
                             }}
                             className="button is-success"
                         >

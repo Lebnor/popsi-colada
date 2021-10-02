@@ -52,14 +52,34 @@ class MarketDetail extends Component {
                 />
             ));
     }
- 
+    // retrieveMarket = (uuid, e) =>
+    //     this.setState({
+    //         market: e,
+    //         foods: e.foods.map((item) => (
+    //             <Food
+    //                 callback={(minusplus) =>
+    //                     this.setState({
+    //                         total: Math.max(
+    //                             0,
+    //                             this.state.total +
+    //                                 item.price_per_unit * minusplus
+    //                         ),
+    //                     })
+    //                 }
+    //                 {...item}
+    //             />
+    //         )),
+    //     })
     
     
 
     render() {
         return (
             <div>
-
+                <NavBar
+                    userdetails={this.props.userdetails}
+                    loggedIn={this.props.loggedIn}
+                />
                 {this.props.notification}
                 <div className="section">
                     <div className="container section box">

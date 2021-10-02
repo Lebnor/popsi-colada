@@ -17,7 +17,26 @@ class MarketDetail extends Component {
         let urlArray = window.location.pathname.split("/");
         // get last part
         let uuid = urlArray[urlArray.length - 1];
-        retrieveMarket(uuid, (e) => this.setState({
+
+    }
+    getFoodsList() {
+        return this.state.foods.map((item) => (
+            <Food
+                callback={(minusplus) =>
+                    this.setState({
+                        total: Math.max(
+                            0,
+                            this.state.total +
+                                item.price_per_unit * minusplus
+                        ),
+                    })
+                }
+                {...item}
+                />
+            ));
+    }
+    retrieveMarket = (uuid, e) =>
+        this.setState({
             market: e,
             foods: e.foods.map((item) => (
                 <Food
@@ -33,33 +52,17 @@ class MarketDetail extends Component {
                     {...item}
                 />
             )),
-        }));
-
-    }
-    getFoodsList() {
-        return this.state.market.foods.map((item) => (
-            <Food
-                callback={(minusplus) =>
-                    this.setState({
-                        total: Math.max(
-                            0,
-                            this.state.total +
-                                item.price_per_unit * minusplus
-                        ),
-                    })
-                }
-                {...item}
-                />
-            ));
-    }
- 
-    
+        })
+    ;
     
 
     render() {
         return (
             <div>
-
+                <NavBar
+                    userdetails={this.props.userdetails}
+                    loggedIn={this.props.loggedIn}
+                />
                 {this.props.notification}
                 <div className="section">
                     <div className="container section box">
@@ -114,7 +117,7 @@ class MarketDetail extends Component {
                         <button
                             onClick={() => {
                                 this.props.submit();
-                                this.setState({ total: 0, foods: this.getFoodsList() });
+                                this.setState({ total: 0, foods: false });
                                 // this.state.foods.forEach((element) => {
                                     // console.log(element);
                                     // element.setAmount(0);

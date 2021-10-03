@@ -20,12 +20,25 @@ class MarketDetail extends Component {
         retrieveMarket(uuid, (e) =>
             this.setState({
                 market: e,
-                foods: this.getFoodsList(e),
+                foods: e.foods.map((item) => (
+                    <Food
+                        callback={(minusplus) =>
+                            this.setState({
+                                total: Math.max(
+                                    0,
+                                    this.state.total +
+                                        item.price_per_unit * minusplus
+                                ),
+                            })
+                        }
+                        {...item}
+                    />
+                )),
             })
         );
     }
-    getFoodsList(market) {
-        return market.foods.map((item) => (
+    getFoodsList() {
+        return this.state.market.foods.map((item) => (
             <Food
                 callback={(minusplus) =>
                     this.setState({
@@ -36,7 +49,6 @@ class MarketDetail extends Component {
                     })
                 }
                 {...item}
-                amount={0}
             />
         ));
     }
@@ -69,7 +81,7 @@ class MarketDetail extends Component {
                         <ul>
                             {this.state.foods &&
                                 this.state.foods.map((item) => (
-                                    <li key={item.id}> {item} </li>
+                                    <li key={item.ind}> {item} </li>
                                 ))}
                         </ul>
                     </div>
@@ -78,13 +90,15 @@ class MarketDetail extends Component {
                         <button
                             onClick={() => {
                                 this.props.submit();
-
-                                window.setTimeout(
-                                    () =>
-                                        (window.location =
-                                            window.location.search),
-                                    2000
-                                );
+                                this.setState({
+                                    total: 0,
+                                    foods: this.getFoodsList(),
+                                });
+                                React.Children.toArray.map(child => console.log(child))
+                                // this.state.foods.forEach((element) => {
+                                // console.log(element);
+                                // element.setAmount(0);
+                                // });
                             }}
                             className="button is-success"
                         >

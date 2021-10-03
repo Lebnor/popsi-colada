@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import NavBar from "../nav/NavBar";
-import GetNotified from "./GetNotified";
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            search: "",
+            search: '',
         };
     }
     render() {
@@ -36,7 +35,7 @@ class Home extends Component {
                                 <NavLink
                                     to={{
                                         pathname: `/markets`,
-                                        state: { uSearch: this.state.search },
+                                        state:{uSearch: this.state.search},
                                         userSearch: this.state.search,
                                     }}
                                     isActive={() => true}
@@ -49,9 +48,32 @@ class Home extends Component {
                     </div>
                 </div>
 
-                <GetNotified />
 
 
+                <section className="section">
+                    <div className="has-text-centered">
+                        <h1 className="is-primary is-size-3">Got notified about new products</h1>
+                        <p className="is-size-5">Sint magna ullamco anim dolore in ullamco ipsum esse cillum dolor.</p>
+                        <div className="home-search nav-list">
+                                <input
+                                    placeholder="Search a market"
+                                    className="home-search-input level-item"
+                                ></input>
+
+                                <NavLink
+                                    to={{
+                                        pathname: `/markets`,
+                                        state:{uSearch: this.state.search},
+                                        userSearch: this.state.search,
+                                    }}
+                                    isActive={() => true}
+                                    activeClassName="home-search-button"
+                                >
+                                    "-"
+                                </NavLink>
+                            </div>
+                    </div>
+                </section>
             </React.Fragment>
         );
     }

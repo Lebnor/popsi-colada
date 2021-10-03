@@ -152,7 +152,6 @@ nav {
 
 .get-notified {
     background-image: url('../green-leaves.png');
-    background-color: $level2;
     min-height: 60vh;
     background-size: 450px;
     background-position-x: 15%;
@@ -337,7 +336,7 @@ $button-color: $red;
 $button-text-color: $red;
 
 // footer
-$footer-background-color: $level1;
+$footer-background-color: $level2;
 $footer-padding: 1.5rem;
 
 // Import only what you need from Bulma

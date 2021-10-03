@@ -10,7 +10,6 @@ import Register from "./Register";
 import Home from "./home/Home";
 import MarketsMain from "./markets/MarketsMain";
 import MarketDetail from "./markets/MarketDetail";
-
 class App extends Component {
     constructor(props) {
         super(props);
@@ -20,39 +19,43 @@ class App extends Component {
             alert("changed");
         }
     }
-  
     render() {
         return (
             <div>
                 <BrowserRouter>
-                    <NavBar {...this.props} />
-                    <Route path="/register" component={Register}></Route>
-                    <Route path="/cds">
-                        <CdManagerPage
-                            userdetails={this.props.userdetails}
-                            loggedIn={this.props.loggedIn}
-                        />
-                    </Route>
-                    <Route path="/markets">
-                        <MarketsMain value={this.props.value} {...this.props} />
-                    </Route>
-                    <Route path="/markets/:search">
-                        <MarketsMain {...this.props} />
-                    </Route>
-                    <Route
-                        path="/market-detail/:uuid"
-                        // render={() => <MarketDetail {...this.props} />}
-                    >
-                        <MarketDetail
-                            userdetails={this.props.userdetails}
-                            {...this.props}
-                        />
-                    </Route>
-                    <Route
-                        exact
-                        path="/"
-                        render={() => <Home {...this.props} />}
-                    ></Route>
+                    <Switch>
+                        <NavBar {...this.props} />
+                        <Route path="/register" component={Register}></Route>
+                        <Route path="/cds">
+                            <CdManagerPage
+                                userdetails={this.props.userdetails}
+                                loggedIn={this.props.loggedIn}
+                            />
+                        </Route>
+                        <Route path="/markets">
+                            <MarketsMain
+                                value={this.props.value}
+                                {...this.props}
+                            />
+                        </Route>
+                        <Route path="/markets/:search">
+                            <MarketsMain {...this.props} />
+                        </Route>
+                        <Route
+                            path="/market-detail/:uuid"
+                            // render={() => <MarketDetail {...this.props} />}
+                        >
+                            <MarketDetail
+                                userdetails={this.props.userdetails}
+                                {...this.props}
+                            />
+                        </Route>
+                        <Route
+                            exact
+                            path="/"
+                            render={() => <Home {...this.props} />}
+                        ></Route>
+                    </Switch>
                 </BrowserRouter>
                 <Footer
                     className="section"

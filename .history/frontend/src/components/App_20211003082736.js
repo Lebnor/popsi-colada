@@ -10,21 +10,21 @@ import Register from "./Register";
 import Home from "./home/Home";
 import MarketsMain from "./markets/MarketsMain";
 import MarketDetail from "./markets/MarketDetail";
-
 class App extends Component {
     constructor(props) {
         super(props);
     }
     componentDidUpdate(prevProps) {
         if (this.props.location !== prevProps.location) {
-            alert("changed");
+          alert('changed')
         }
-    }
-  
+      }
     render() {
         return (
             <div>
                 <BrowserRouter>
+
+                <Switch>
                     <NavBar {...this.props} />
                     <Route path="/register" component={Register}></Route>
                     <Route path="/cds">
@@ -53,6 +53,7 @@ class App extends Component {
                         path="/"
                         render={() => <Home {...this.props} />}
                     ></Route>
+                    </Switch>
                 </BrowserRouter>
                 <Footer
                     className="section"

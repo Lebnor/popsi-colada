@@ -51,7 +51,7 @@ class Home extends Component {
 
                 <GetNotified />
 
-
+                <div className="section"></div>
             </React.Fragment>
         );
     }

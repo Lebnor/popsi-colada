@@ -24,7 +24,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                <BrowserRouter>
+                <BrowserRouter onChange={()=>alert('changed')}>
                     <NavBar {...this.props} />
                     <Route path="/register" component={Register}></Route>
                     <Route path="/cds">

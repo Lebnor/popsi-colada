@@ -24,16 +24,16 @@ class App extends Component {
     render() {
         return (
             <div>
-                <BrowserRouter>
+                <BrowserRouter onChange={()=>alert('changed')}>
                     <NavBar {...this.props} />
-                    <Route path="/register" component={Register}></Route>
-                    <Route path="/cds">
+                    <Route  path="/register" component={Register}></Route>
+                    <Route onChange={()=>alert('changed')} path="/cds">
                         <CdManagerPage
                             userdetails={this.props.userdetails}
                             loggedIn={this.props.loggedIn}
                         />
                     </Route>
-                    <Route path="/markets">
+                    <Route onChange={()=>alert('changed')} path="/markets">
                         <MarketsMain value={this.props.value} {...this.props} />
                     </Route>
                     <Route path="/markets/:search">

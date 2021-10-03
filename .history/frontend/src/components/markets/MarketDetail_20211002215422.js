@@ -78,13 +78,18 @@ class MarketDetail extends Component {
                         <button
                             onClick={() => {
                                 this.props.submit();
-
-                                window.setTimeout(
-                                    () =>
-                                        (window.location =
-                                            window.location.search),
-                                    2000
-                                );
+                                // this.setState({
+                                //     total: 0,
+                                //     foods: this.getFoodsList(this.state.market),
+                                // });
+                                window.location = window.location;
+                                this.props.submit();
+                                
+                                React.Children.toArray(this.props.children).map(child => console.log(child))
+                                // this.state.foods.forEach((element) => {
+                                // console.log(element);
+                                // element.setAmount(0);
+                                // });
                             }}
                             className="button is-success"
                         >

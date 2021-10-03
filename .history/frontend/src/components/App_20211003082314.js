@@ -10,30 +10,24 @@ import Register from "./Register";
 import Home from "./home/Home";
 import MarketsMain from "./markets/MarketsMain";
 import MarketDetail from "./markets/MarketDetail";
-
 class App extends Component {
     constructor(props) {
         super(props);
     }
-    componentDidUpdate(prevProps) {
-        if (this.props.location !== prevProps.location) {
-            alert("changed");
-        }
-    }
-  
+
     render() {
         return (
             <div>
                 <BrowserRouter>
                     <NavBar {...this.props} />
                     <Route path="/register" component={Register}></Route>
-                    <Route path="/cds">
+                    <Route ind={2} path="/cds">
                         <CdManagerPage
                             userdetails={this.props.userdetails}
                             loggedIn={this.props.loggedIn}
                         />
                     </Route>
-                    <Route path="/markets">
+                    <Route ind={1} path="/markets">
                         <MarketsMain value={this.props.value} {...this.props} />
                     </Route>
                     <Route path="/markets/:search">

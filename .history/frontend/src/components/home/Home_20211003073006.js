@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import NavBar from "../nav/NavBar";
-import GetNotified from "./GetNotified";
 
 class Home extends Component {
     constructor(props) {
@@ -49,9 +48,38 @@ class Home extends Component {
                     </div>
                 </div>
 
-                <GetNotified />
+                <section className="section">
+                    <div className="has-text-centered">
+                        <h1 className="has-text-primary is-size-3">
+                            Got notified
+                        </h1>
+                        <h1 className="has-text-primary is-size-3">
+                            about new products
+                        </h1>
+                        <p className="is-size-5">
+                            Sint magna ullamco anim dolore in ullamco ipsum esse
+                        </p>
+                        <p className="is-size-5"> cillum dolor.</p>
+                        <div className="mx-auto home-search nav-list">
+                            <input
+                                placeholder="E-mail"
+                                className="level-item"
+                            ></input>
 
-
+                            <NavLink
+                                to={{
+                                    pathname: `/markets`,
+                                    state: { uSearch: this.state.search },
+                                    userSearch: this.state.search,
+                                }}
+                                isActive={() => true}
+                                activeClassName="home-search-button"
+                            >
+                                "-"
+                            </NavLink>
+                        </div>
+                    </div>
+                </section>
             </React.Fragment>
         );
     }

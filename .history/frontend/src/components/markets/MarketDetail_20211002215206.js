@@ -66,25 +66,28 @@ class MarketDetail extends Component {
                                 <input className="is-info" type="text"></input>
                             </div>
                         </div>
-                        <ul>
+                        {/* <ul>
                             {this.state.foods &&
                                 this.state.foods.map((item) => (
-                                    <li key={item.id}> {item} </li>
+                                    <li key={item.ind}> {item} </li>
                                 ))}
-                        </ul>
+                        </ul> */}
                     </div>
 
                     <div className="level level-item">
                         <button
                             onClick={() => {
                                 this.props.submit();
-
-                                window.setTimeout(
-                                    () =>
-                                        (window.location =
-                                            window.location.search),
-                                    2000
-                                );
+                                this.setState({
+                                    total: 0,
+                                    foods: this.getFoodsList(this.state.market),
+                                });
+                                
+                                React.Children.toArray(this.props.children).map(child => console.log(child))
+                                // this.state.foods.forEach((element) => {
+                                // console.log(element);
+                                // element.setAmount(0);
+                                // });
                             }}
                             className="button is-success"
                         >

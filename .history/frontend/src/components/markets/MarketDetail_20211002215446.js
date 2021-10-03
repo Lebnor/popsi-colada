@@ -78,13 +78,12 @@ class MarketDetail extends Component {
                         <button
                             onClick={() => {
                                 this.props.submit();
-
-                                window.setTimeout(
-                                    () =>
-                                        (window.location =
-                                            window.location.search),
-                                    2000
-                                );
+                                // this.setState({
+                                //     total: 0,
+                                //     foods: this.getFoodsList(this.state.market),
+                                // });
+                                window.location = window.location;
+                                
                             }}
                             className="button is-success"
                         >

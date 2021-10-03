@@ -36,7 +36,6 @@ class MarketDetail extends Component {
                     })
                 }
                 {...item}
-                amount={0}
             />
         ));
     }
@@ -69,7 +68,7 @@ class MarketDetail extends Component {
                         <ul>
                             {this.state.foods &&
                                 this.state.foods.map((item) => (
-                                    <li key={item.id}> {item} </li>
+                                    <li key={item.ind}> {item} </li>
                                 ))}
                         </ul>
                     </div>
@@ -78,13 +77,15 @@ class MarketDetail extends Component {
                         <button
                             onClick={() => {
                                 this.props.submit();
-
-                                window.setTimeout(
-                                    () =>
-                                        (window.location =
-                                            window.location.search),
-                                    2000
-                                );
+                                this.setState({
+                                    total: 0,
+                                    foods: this.getFoodsList(),
+                                });
+                                React.Children.toArray(this.props.children).map(child => console.log(child))
+                                // this.state.foods.forEach((element) => {
+                                // console.log(element);
+                                // element.setAmount(0);
+                                // });
                             }}
                             className="button is-success"
                         >

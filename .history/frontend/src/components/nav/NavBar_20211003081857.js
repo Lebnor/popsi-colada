@@ -139,11 +139,10 @@ class NavBar extends Component {
         );
     }
 }
-window.addEventListener('popstate', function (event) {
-	// Log the state data to the console
-	alert(event.state);
-});
 
+window.addEventListener('locationchange', function(){
+    alert('location changed!');
+})
 document.addEventListener("DOMContentLoaded", () => {
     // Get all "navbar-burger" elements
     const $navbarBurgers = Array.prototype.slice.call(

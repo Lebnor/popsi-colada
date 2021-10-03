@@ -139,12 +139,6 @@ nav {
     column-count: 4;
 }
 
-.circle {
-    width: 1rem;
-    height: 1rem;
-    border-radius: 100%;
-}
-
 .card-market {
     width: 225px;
     height: 325px;
@@ -152,15 +146,12 @@ nav {
 
 .get-notified {
     background-image: url('../green-leaves.png');
-    background-color: $level2;
     min-height: 60vh;
-    background-size: 450px;
-    background-position-x: 15%;
-    background-position-y: 25%;
+    background-size: auto;
+    background-position-x: 0%;
+    background-position-y: 50%;
     background-repeat: no-repeat;
 }
-
-
 
 @media only screen and (max-width: 768px) {
     .home-container {
@@ -170,9 +161,6 @@ nav {
         background-repeat: no-repeat, repeat;
         background-size: 80vw 80vw, auto;
         background-position: left 80% top 50%, top 0 left 0;
-    }
-    .get-notified {
-        background-position-x: -100px;
     }
 }
 
@@ -198,9 +186,6 @@ nav {
         background-repeat: no-repeat, repeat;
         background-size: 325px 325px, auto;
         background-position: left 20% top 75%, top 0 left 0;
-    }
-    .get-notified {
-        background-position-x: -200px;
     }
 }
 .appear {
@@ -337,7 +322,7 @@ $button-color: $red;
 $button-text-color: $red;
 
 // footer
-$footer-background-color: $level1;
+$footer-background-color: $level2;
 $footer-padding: 1.5rem;
 
 // Import only what you need from Bulma

@@ -10,17 +10,15 @@ import Register from "./Register";
 import Home from "./home/Home";
 import MarketsMain from "./markets/MarketsMain";
 import MarketDetail from "./markets/MarketDetail";
-
 class App extends Component {
     constructor(props) {
         super(props);
     }
     componentDidUpdate(prevProps) {
         if (this.props.location !== prevProps.location) {
-            alert("changed");
+          alert('changed')
         }
-    }
-  
+      }
     render() {
         return (
             <div>

@@ -10,6 +10,7 @@ import Register from "./Register";
 import Home from "./home/Home";
 import MarketsMain from "./markets/MarketsMain";
 import MarketDetail from "./markets/MarketDetail";
+import { browserHistory } from 'react-router';
 
 class App extends Component {
     constructor(props) {
@@ -20,7 +21,11 @@ class App extends Component {
             alert("changed");
         }
     }
-  
+    componentDidMount() {
+        browserHistory.listen( location =>  {
+            alert(location);
+       });
+    }
     render() {
         return (
             <div>

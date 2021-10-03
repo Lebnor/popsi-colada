@@ -139,10 +139,8 @@ class NavBar extends Component {
         );
     }
 }
-window.addEventListener('popstate', function (event) {
-	// Log the state data to the console
-	alert(event.state);
-});
+
+window.onpopstate = () => alert('pop state changed')
 
 document.addEventListener("DOMContentLoaded", () => {
     // Get all "navbar-burger" elements

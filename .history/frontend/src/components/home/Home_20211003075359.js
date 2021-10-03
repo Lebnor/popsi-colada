@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import NavBar from "../nav/NavBar";
-import GetNotified from "./GetNotified";
 
 class Home extends Component {
     constructor(props) {
@@ -51,7 +50,7 @@ class Home extends Component {
 
                 <GetNotified />
 
-
+                <div className="section"></div>
             </React.Fragment>
         );
     }

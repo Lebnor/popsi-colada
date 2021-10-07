@@ -4,7 +4,7 @@ import ProfileIcon from "./ProfileIcon";
 import { AiOutlineUser } from "react-icons/ai";
 import { withRouter } from "react-router";
 
-const MyNavBar = ({ loggedIn, userdetails }) => {
+const MyNavBar = ({ loggedIn, userdetails}) => {
     return (
         <nav
             className="navbar is-narrow"
@@ -73,35 +73,29 @@ const MyNavBar = ({ loggedIn, userdetails }) => {
                 <div className="column is-offset-5 navbar-end">
                     <div className="navbar-item">
                         <div className="buttons is-justify-content-center">
-                            <ProfileIcon loggedIn={loggedIn} userdetails={userdetails} />
+                            <ProfileIcon />
 
-                            {!loggedIn && (
-                                <a
-                                    href="/api/register"
-                                    className="button is-success"
-                                >
-                                    Register
-                                </a>
-                            )}
+                            {/* {!this.props.loggedIn && (
+                            <a
+                                href="/api/register"
+                                className="button is-success"
+                            >
+                                Register
+                            </a>
+                        )}
 
-                            {!loggedIn && (
-                                <a
-                                    href="/api/login"
-                                    className="button is-light"
-                                >
-                                    {" "}
-                                    Log In{" "}
-                                </a>
-                            )}
-                            {loggedIn && (
-                                <a
-                                    href="/api/logout"
-                                    className="button is-light"
-                                >
-                                    {" "}
-                                    Log Out
-                                </a>
-                            )}
+                        {!this.props.loggedIn && (
+                            <a href="/api/login" className="button is-light">
+                                {" "}
+                                Log In{" "}
+                            </a>
+                        )}
+                        {this.props.loggedIn && (
+                            <a href="/api/logout" className="button is-light">
+                                {" "}
+                                Log Out
+                            </a>
+                        )} */}
                         </div>
                     </div>
                 </div>

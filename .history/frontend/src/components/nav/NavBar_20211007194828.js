@@ -73,9 +73,9 @@ const MyNavBar = ({ loggedIn, userdetails }) => {
                 <div className="column is-offset-5 navbar-end">
                     <div className="navbar-item">
                         <div className="buttons is-justify-content-center">
-                            <ProfileIcon loggedIn={loggedIn} userdetails={userdetails} />
+                            <ProfileIcon />
 
-                            {!loggedIn && (
+                            {!this.props.loggedIn && (
                                 <a
                                     href="/api/register"
                                     className="button is-success"
@@ -84,7 +84,7 @@ const MyNavBar = ({ loggedIn, userdetails }) => {
                                 </a>
                             )}
 
-                            {!loggedIn && (
+                            {!this.props.loggedIn && (
                                 <a
                                     href="/api/login"
                                     className="button is-light"
@@ -93,7 +93,7 @@ const MyNavBar = ({ loggedIn, userdetails }) => {
                                     Log In{" "}
                                 </a>
                             )}
-                            {loggedIn && (
+                            {this.props.loggedIn && (
                                 <a
                                     href="/api/logout"
                                     className="button is-light"

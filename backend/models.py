@@ -15,10 +15,11 @@ class User(AbstractUser):
 
 class Food(models.Model):
     id = models.AutoField(primary_key=True)
+    uuid = models.UUIDField(
+        default=uuid.uuid4, editable=False, null=True)
     name = models.CharField(max_length=50)
     units = models.PositiveIntegerField()
     price_per_unit = models.PositiveIntegerField()
-
 
 
 class Market(models.Model):

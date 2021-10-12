@@ -12,8 +12,6 @@ class MarketDetail extends Component {
             foods: false,
         };
         this.ls = [];
-        // this.refs = [];
-        // this.myRef = React.createRef();
     }
     componentDidMount() {
         let urlArray = window.location.pathname.split("/");
@@ -72,15 +70,9 @@ class MarketDetail extends Component {
                         </div>
                         <ul>
                             {this.state.foods &&
-                                this.state.foods.map((food) => {
-                                    // let ref = React.createRef();
-                                    // console.log(ref);
-                                    return (
-                                        <li key={food.id}>
-                                            {food}
-                                        </li>
-                                    );
-                                })}
+                                this.state.foods.map((food) => (
+                                    <li key={food.id}>{food}</li>
+                                ))}
                         </ul>
                     </div>
 
@@ -88,8 +80,8 @@ class MarketDetail extends Component {
                         <button
                             onClick={() => {
                                 this.props.submit();
-                                this.setState({total: 0})
-                                this.ls.forEach(func => func(0))
+                                this.setState({ total: 0 });
+                                this.ls.forEach((func) => func(0));
                             }}
                             className="button is-success"
                         >

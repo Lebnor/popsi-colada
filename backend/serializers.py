@@ -4,18 +4,20 @@ from .models import Cd, User, Market, Food
 # , Stock
 
 
-class FoodSerializer(serializers.ModelSerializer):
-    markets = serializers.StringRelatedField(many=True)
-    class Meta:
-        model = Food
-        fields = '__all__'
+
         
 class MarketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Market
         fields = '__all__'
         depth = 1
-
+class FoodSerializer(serializers.ModelSerializer):
+    # markets = serializers.StringRelatedField(many=True)
+    # markets = serializers.ManyRelatedField(many=True, read_only=True)
+    markets = MarketSerializer(many=True, read_only=True)
+    class Meta:
+        model = Food
+        fields = '__all__'
 class CdSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cd

@@ -27,8 +27,9 @@ const withSearch = (WrappedComponent, url, props) => {
 
         render() {
             return <WrappedComponent 
+            search={this.state.search}
             setSearch={search => this.setState({search: search})}
-            objects={this.state.objects.map(item=>item)}
+            objects={this.state.objects.filter(item=>item.name.includes(this.state.search))}
             {...props}
             {...this.props}
             />;

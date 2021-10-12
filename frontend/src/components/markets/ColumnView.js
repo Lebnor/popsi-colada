@@ -19,7 +19,7 @@ class ColumnView extends Component {
                             {this.props.objects &&
                                 this.props.objects.map((item, ind) => (
                                     <li className="my-4" key={ind}>
-                                        {ind % 4 === colInd && item}
+                                        {ind % this.props.cols === colInd && item}
                                     </li>
                                 ))}
                         </ul>

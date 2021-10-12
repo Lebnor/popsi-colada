@@ -10,7 +10,7 @@ import Register from "./Register";
 import Home from "./home/Home";
 import MarketsMain from "./markets/MarketsMain";
 import MarketDetail from "./markets/MarketDetail";
-import {withRouter} from 'react-router';
+import FoodDetail from "./markets/FoodDetail";
 
 class App extends Component {
     constructor(props) {
@@ -22,40 +22,37 @@ class App extends Component {
         return (
             <div>
                 <BrowserRouter>
-                    <NavBar  {...this.props}>
-                        
-                    </NavBar>
-                    <Route path="/register" component={Register}></Route>
-                    <Route path="/cds">
-                        {this.active = 2}
-                        <CdManagerPage
-                            userdetails={this.props.userdetails}
-                            loggedIn={this.props.loggedIn}
-                        />
-                    </Route>
-                    <Route path="/markets">
-                        {this.active = 1}
-                        <MarketsMain value={this.props.value} {...this.props} />
-                    </Route>
-                    <Route path="/markets/:search">
-                        {this.active = 1}
-                        <MarketsMain {...this.props} />
-                    </Route>
-                    <Route
-                        path="/market-detail/:uuid"
-                    >
-                        <MarketDetail
-                            userdetails={this.props.userdetails}
-                            {...this.props}
-                        />
-                    </Route>
-                    <Route
-                    exact={true}
-                        exact
-                        path="/"
-                        render={() => <Home {...this.props} />}
-                    >
-                    </Route>
+                        <NavBar {...this.props}></NavBar>
+                        <Route path="/register" component={Register}></Route>
+                        <Route path="/cds">
+                            <CdManagerPage
+                                userdetails={this.props.userdetails}
+                                loggedIn={this.props.loggedIn}
+                            />
+                        </Route>
+                        <Route path="/browse">
+                            <MarketsMain
+                                value={this.props.value}
+                                {...this.props}
+                            />
+                        </Route>
+                        <Route path="/market-detail/:uuid">
+                            <MarketDetail
+                                userdetails={this.props.userdetails}
+                                {...this.props}
+                            />
+                        </Route>
+                        <Route path="/food-detail/:uuid">
+                                <FoodDetail
+                                    {...this.props}
+                                />
+                            </Route>
+                        <Route
+                            exact={true}
+                            exact
+                            path="/"
+                            render={() => <Home {...this.props} />}
+                        ></Route>
                 </BrowserRouter>
                 <Footer
                     className="section"

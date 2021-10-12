@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 
 
-def market_detail(request, uuid):
+def market_detail(request, uuid=None):
     return render(request, 'frontend/index.html')
 
 

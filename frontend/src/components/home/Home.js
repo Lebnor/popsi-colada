@@ -43,14 +43,14 @@ class Home extends Component {
                                         })
                                     }
                                     value={this.state.search}
-                                    placeholder="Search a market"
+                                    placeholder="Search food, market"
                                     className="home-search-input level-item"
                                 ></input>
 
                                 <NavLink
                     
                                     to={{
-                                        pathname: `/markets`,
+                                        pathname: `/browse`,
                                         state: {
                                             uSearch: this.state.search,
                                         },

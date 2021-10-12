@@ -1,43 +1,38 @@
 import React, { Component } from "react";
 import { getMarketsList } from "../utils";
+import { getFoodsList } from "../utils";
 import ColumnView from "./ColumnView";
 import NavBar from "../nav/NavBar";
 import MarketCard from "./MarketCard";
 import FoodsView from "./FoodsView";
+import withSearch from "../cd_manager/Form/withSearch";
+import FoodColumnView from "./FoodColumnView";
+import withFavorites from "../cd_manager/Form/withFavorites";
 
 class MarketsMain extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            objects: [],
-            search: history.state.state ? history.state.state.uSearch : '',
-        };
+        
     }
-    validObjects() {
-        let validObs = [];
-        this.state.objects.map((item) => {
-            if (
-                item.name.includes(this.state.search) ||
-                item.description.includes(this.state.search)
-            )
-                validObs.push(item);
-        });
-        return validObs;
-    }
+
     // fetch list of supermarkets
     componentDidMount() {
+        this.props.setSearch(
+            history.state && history.state.state
+                ? history.state.state.uSearch
+                : ""
+        );
         getMarketsList((e) => this.setState({ objects: e }));
     }
 
     render() {
         return (
             <React.Fragment>
-
                 <div className="container mt-4">
                     <div className="columns is-align-items-center">
                         <h1 className="has-text-primary is-size-3 column is-half">
                             Supermarkets List{" "}
-                            <small>({this.validObjects().length} found)</small>
+                            <small>({this.props.objects.length} found)</small>
                         </h1>
                         <div className="field-label is-normal">
                             <label className="label">Search:</label>
@@ -49,11 +44,9 @@ class MarketsMain extends Component {
                                         className="input is-primary"
                                         type="text"
                                         placeholder="name"
-                                        value={this.state.search}
+                                        value={this.props.search}
                                         onChange={(e) =>
-                                            this.setState({
-                                                search: e.target.value,
-                                            })
+                                            this.props.setSearch(e.target.value)
                                         }
                                     />
                                 </p>
@@ -63,19 +56,21 @@ class MarketsMain extends Component {
 
                     <ColumnView
                         cols={4}
-                        search={this.state.search}
-                        objects={this.validObjects().map((item) => (
-                            <MarketCard
-                                name={item.name}
-                                description={item.description}
-                                img={item.img}
-                                uuid={item.uuid}
-                            />
-                        ))}
+                        search={this.props.search}
+                        objects={this.props.objects.map((market) => {
+                            return (
+                                <MarketCard
+                                    name={market.name}
+                                    description={market.description}
+                                    img={market.img}
+                                    uuid={market.uuid}
+                                    favorite={market.uuid.indexOf(this.props.favorites) !== -1}
+                                />
+                            );
+                        })}
                     />
 
-                
-
+                    <FoodColumnView cols={4} />
                 </div>
                 <div className="section"></div>
             </React.Fragment>
@@ -83,4 +78,4 @@ class MarketsMain extends Component {
     }
 }
 
-export default MarketsMain;
+export default  withFavorites(withSearch(MarketsMain, "/api/markets", []));

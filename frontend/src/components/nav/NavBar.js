@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import ProfileIcon from "./ProfileIcon";
-import { AiOutlineUser } from "react-icons/ai";
-import { withRouter } from "react-router";
 
 const MyNavBar = ({ loggedIn, userdetails }) => {
     return (
@@ -46,7 +44,6 @@ const MyNavBar = ({ loggedIn, userdetails }) => {
                         isActive={() => {
                             if (!location) return false;
                             const { pathname } = location;
-                            console.log(pathname);
                             return pathname === "/";
                         }}
                         to="/"
@@ -56,9 +53,9 @@ const MyNavBar = ({ loggedIn, userdetails }) => {
                     <NavLink
                         className="navbar-item"
                         activeClassName="is-active"
-                        to="/markets"
+                        to="/browse"
                     >
-                        Markets
+                        Browse
                     </NavLink>
 
                     <NavLink
@@ -244,11 +241,6 @@ class NavBar extends Component {
         );
     }
 }
-window.addEventListener("popstate", function (event) {
-    // Log the state data to the console
-    alert(event.state);
-});
-
 document.addEventListener("DOMContentLoaded", () => {
     // Get all "navbar-burger" elements
     const $navbarBurgers = Array.prototype.slice.call(
@@ -272,14 +264,5 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
-window.onpushstate = function (event) {
-    alert(
-        "location: " +
-            document.location +
-            ", state: " +
-            JSON.stringify(event.state)
-    );
-};
 
-// export default withRouter(NavBar);
 export default MyNavBar;

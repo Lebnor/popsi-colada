@@ -68,8 +68,8 @@ class SingleRecord extends Component {
         }
         return (
             <div className="">
-                <h2 className="is-size-1-desktop has-text-centered has-text-black	">
-                    Editing {this.props.cd.name} ({this.props.cd.amount})
+                <h2 className="is-size-1-desktop has-text-centered has-text-warning">
+                    Edit Mode
                 </h2>
 
                 <form className="section">
@@ -84,6 +84,7 @@ class SingleRecord extends Component {
                                         updates={(e) =>
                                             this.setState({ nameVal: e })
                                         }
+                                        value={this.props.cd.name}
                                     />
                                 </div>
                             </div>
@@ -101,6 +102,7 @@ class SingleRecord extends Component {
                                         updates={(e) =>
                                             this.setState({ amountVal: e })
                                         }
+                                        value={this.props.cd.amount}
                                     />
                                 </div>
                             </div>

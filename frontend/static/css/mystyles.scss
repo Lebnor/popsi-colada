@@ -151,7 +151,7 @@ nav {
 }
 
 .get-notified {
-    background-image: url('../green-leaves.png');
+    background-image: url("../green-leaves.png");
     background-color: $level2;
     min-height: 60vh;
     background-size: 450px;
@@ -160,7 +160,40 @@ nav {
     background-repeat: no-repeat;
 }
 
+@keyframes jump {
+    60% {
+        transform: translateY(-15px);
+        filter: brightness(1.15);
+        color: yellowgreen;
+    }
+    100% {
+        transform: translateY(0px);
+        filter: brightness(1);
+        color: yellow;
+    }
+}
 
+.jump {
+    display: block;
+    animation-name: jump;
+    animation-duration: 1s;
+}
+
+@keyframes shrink {
+    60% {
+        transform: scale(0.85);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.shrink {
+    display: block;
+    animation-name: shrink;
+    animation-duration: 1s;
+
+}
 
 @media only screen and (max-width: 768px) {
     .home-container {
@@ -335,22 +368,10 @@ $input-shadow: none;
 $container-max-width: 900px;
 $button-color: $red;
 $button-text-color: $red;
+$table-background-color: $level2;
 
 // footer
 $footer-background-color: $level1;
 $footer-padding: 1.5rem;
 
-// Import only what you need from Bulma
-// @import "../../node_modules/bulma/sass/utilities/_all.sass";
-// @import "../../node_modules/bulma/sass/base/_all.sass";
-// @import "../../node_modules/bulma/sass/elements/button.sass";
-// @import "../../node_modules/bulma/sass/elements/container.sass";
-// @import "../../node_modules/bulma/sass/elements/title.sass";
-// @import "../../node_modules/bulma/sass/form/_all.sass";
-// @import "../../node_modules/bulma/sass/layout/_all.sass";
-// @import "../../node_modules/bulma/sass/grid/_all.sass";
-// @import "../../node_modules/bulma/sass/helpers/_all.sass";
-// @import "../../node_modules/bulma/sass/components/_all.sass"
-
-// for this project import everything
 @import "../../node_modules/bulma/bulma.sass";

@@ -13,18 +13,20 @@ class ColumnView extends Component {
     render() {
         return (
             <div className="columns">
-                {[...Array(this.props.cols)].map((x, colInd) => (
-                    <div key={colInd} className="column auto">
-                        <ul className="">
-                            {this.props.objects &&
-                                this.props.objects.map((item, ind) => (
-                                    <li className="my-4" key={ind}>
-                                        {ind % this.props.cols === colInd && item}
-                                    </li>
-                                ))}
-                        </ul>
-                    </div>
-                ))}
+                {this.props.objects &&
+                    [...Array(this.props.cols)].map((x, colInd) => (
+                        <div key={colInd} className="column auto">
+                            <ul className="">
+                                {this.props.objects &&
+                                    this.props.objects.map((item, ind) => (
+                                        <li className="my-4" key={ind}>
+                                            {ind % this.props.cols === colInd &&
+                                                item}
+                                        </li>
+                                    ))}
+                            </ul>
+                        </div>
+                    ))}
             </div>
         );
     }

@@ -29,6 +29,7 @@ const withValidation = (WrappedComponent, validation, details) => {
                         name={this.props.name}
                         onChange={(e) => this.onChange(e)}
                         cls={this.state.cls}
+                        {...this.props}
                     />
                     {this.state.cls === "input is-danger" && (
                         <small className="has-text-danger">{details}</small>

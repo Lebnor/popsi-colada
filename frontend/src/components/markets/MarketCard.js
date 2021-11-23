@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Star from "../Star";
+import { addMarketFavorite } from "../utils";
 
 class MarketCard extends Component {
     sizeClass(name) {
-        if (name.length > 6) return "is-size-5";
+        if (name !== null && name.length > 6) return "is-size-5";
         else return "is-size-2";
     }
 
@@ -26,16 +27,13 @@ class MarketCard extends Component {
                                 />
                             </Link>
                         </figure>
-                        <div
-                            style={{
-                                position: "absolute",
-                                top: "0px",
-                                right: "0px",
-                                width: "32px",
-                                height: "32px",
-                            }}
-                        >
-                            <Star filled={this.props.favorite} />
+                        <div>
+                            <Star
+                                onClick={() =>
+                                    addMarketFavorite(this.props.uuid)
+                                }
+                                filled={this.props.is_favorite}
+                            />
                         </div>
                     </div>
                     <div className="card-content">

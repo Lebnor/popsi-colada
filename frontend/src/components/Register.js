@@ -18,8 +18,6 @@ class Register extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        // let res = register("yyy", "yyy@yyy.com", "djfkngksjen3434d2");
-        // console.log("res: " + res);
     }
     render() {
         return (

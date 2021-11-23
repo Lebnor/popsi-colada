@@ -112,6 +112,32 @@ nav {
   background-position-y: 25%;
   background-repeat: no-repeat; }
 
+@keyframes jump {
+  60% {
+    transform: translateY(-15px);
+    filter: brightness(1.15);
+    color: yellowgreen; }
+  100% {
+    transform: translateY(0px);
+    filter: brightness(1);
+    color: yellow; } }
+
+.jump {
+  display: block;
+  animation-name: jump;
+  animation-duration: 1s; }
+
+@keyframes shrink {
+  60% {
+    transform: scale(0.85); }
+  100% {
+    transform: scale(1); } }
+
+.shrink {
+  display: block;
+  animation-name: shrink;
+  animation-duration: 1s; }
+
 @media only screen and (max-width: 768px) {
   .home-container {
     height: 80vh;
@@ -2006,7 +2032,7 @@ div.icon-text {
     background-position: -200% 0; } }
 
 .table {
-  background-color: white;
+  background-color: #fff5ec;
   color: #363636; }
   .table td,
   .table th {

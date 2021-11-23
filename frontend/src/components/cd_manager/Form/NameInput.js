@@ -10,7 +10,7 @@ class NameInput extends Component {
 
         return (
             <div>
-                <input onChange={onChange} className={cls}></input>
+                <input value={this.props.value} onChange={onChange} className={cls}></input>
             </div>
         );
     }

@@ -1,6 +1,6 @@
-function sleep(ms) {
-    new Promise((r) => setTimeout(r, 2000));
-}
+/**
+ *  declares functions to communicate with the backend and fetch data
+ */
 
 export function getCookie(name) {
     var cookieValue = null;
@@ -34,8 +34,8 @@ export function register(username, email, password) {
             password: password,
         }),
     })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+        
+    
 }
 
 export function createRecord(name, amount) {
@@ -51,17 +51,25 @@ export function createRecord(name, amount) {
         },
         body: JSON.stringify({ name: name, amount: amount }),
     })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-        });
+}
+
+export function getFoodsList(callback) {
+    getList("/api/foods/", callback);
 }
 
 export function getCdList(callback) {
-    getList("/api/cds", callback);
+    getList("/api/cds/", callback);
 }
 export function getMarketsList(callback) {
-    getList("/api/markets", callback);
+    getList("/api/markets/", callback);
+}
+
+export function getFavoritesList(callback) {
+    getList("/api/favorites/1/", callback);
+}
+
+export function retrieveFavorites(callback) {
+    retrieve("/api/favorites-self/", callback);
 }
 
 function getList(search, callback) {
@@ -80,8 +88,16 @@ function getList(search, callback) {
         });
 }
 
+export function retrieveFood(uuid, callback) {
+    return retrieve(`/api/foods/${uuid}`, callback);
+}
+
 export function retrieveMarket(uuid, callback) {
-    fetch(`/api/market-detail/${uuid}`)
+    return retrieve(`/api/markets/${uuid}`, callback);
+}
+
+function retrieve(url, callback) {
+    fetch(url)
         .then((response) => response.json())
         .then((data) => {
             callback(data);
@@ -101,9 +117,7 @@ export function deleteCd(id) {
         },
         body: JSON.stringify({ id: id }),
     })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((err) => console.log(err));
+        
 }
 
 export function update(id, name, amount) {
@@ -123,6 +137,27 @@ export function update(id, name, amount) {
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
         });
+}
+
+export function addMarketFavorite(uuid) {
+    addFavorite(`markets/${uuid}`);
+}
+
+export function addFoodFavorite(uuid) {
+    addFavorite(`foods/${uuid}`);
+}
+
+function addFavorite(uuid) {
+    let csrftoken = getCookie("csrftoken");
+    fetch(`/api/add-favorite/${uuid}`, {
+        credentials: "include",
+        method: "PUT",
+        mode: "same-origin",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrftoken,
+        },
+    });
 }

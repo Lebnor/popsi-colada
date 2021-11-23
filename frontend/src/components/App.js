@@ -11,6 +11,7 @@ import Home from "./home/Home";
 import MarketsMain from "./markets/MarketsMain";
 import MarketDetail from "./markets/MarketDetail";
 import FoodDetail from "./markets/FoodDetail";
+import Root from "./favorites/Root";
 
 class App extends Component {
     constructor(props) {
@@ -18,7 +19,6 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.props.children);
         return (
             <div>
                 <BrowserRouter>
@@ -36,6 +36,9 @@ class App extends Component {
                                 {...this.props}
                             />
                         </Route>
+                        <Route path="/favorite">
+                            <Root />
+                        </Route>
                         <Route path="/market-detail/:uuid">
                             <MarketDetail
                                 userdetails={this.props.userdetails}
@@ -44,6 +47,7 @@ class App extends Component {
                         </Route>
                         <Route path="/food-detail/:uuid">
                                 <FoodDetail
+                                    match={this.props.match}
                                     {...this.props}
                                 />
                             </Route>
@@ -67,7 +71,7 @@ class App extends Component {
 const loggedIn = document.getElementById("app");
 const notLoggedIn = document.getElementById("app-not-authenticated");
 
-fetch("/api/users/")
+fetch("/api/current-user/")
     .then((response) => response.json())
     .then((res) => {
         render(<App userdetails={res.username} loggedIn={true} />, loggedIn);

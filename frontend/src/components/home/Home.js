@@ -12,19 +12,7 @@ class Home extends Component {
     }
 
     render() {
-        if (this.state.redirect)
-            return (
-                <Redirect
-                    to={{
-                        pathname: `/markets`,
-                        state: {
-                            uSearch: this.state.search,
-                        },
-
-                        //, userSearch: this.state.search,
-                    }}
-                ></Redirect>
-            );
+       
         return (
             <React.Fragment>
                 <div className="home-container">

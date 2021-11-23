@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { getMarketsList } from "../utils";
 import { getFoodsList } from "../utils";
 import ColumnView from "./ColumnView";
-import NavBar from "../nav/NavBar";
 import MarketCard from "./MarketCard";
 import FoodsView from "./FoodsView";
 import withSearch from "../cd_manager/Form/withSearch";
@@ -22,7 +21,8 @@ class MarketsMain extends Component {
                 ? history.state.state.uSearch
                 : ""
         );
-        getMarketsList((e) => this.setState({ objects: e }));
+        getMarketsList((e) => this.setState({ markets: e }));
+        getFoodsList((e)=> this.setState({ foods: e}));
     }
 
     render() {
@@ -57,14 +57,14 @@ class MarketsMain extends Component {
                     <ColumnView
                         cols={4}
                         search={this.props.search}
-                        objects={this.props.objects.map((market) => {
+                        objects={this.props.objects && this.props.objects.map((market) => {
                             return (
                                 <MarketCard
                                     name={market.name}
                                     description={market.description}
                                     img={market.img}
                                     uuid={market.uuid}
-                                    favorite={market.uuid.indexOf(this.props.favorites) !== -1}
+                                    is_favorite={market.is_favorite}
                                 />
                             );
                         })}

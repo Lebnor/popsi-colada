@@ -6,7 +6,6 @@ class MarketDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            uuid: "",
             market: "",
             total: 0,
             foods: false,
@@ -14,8 +13,8 @@ class MarketDetail extends Component {
         this.ls = [];
     }
     componentDidMount() {
+        // get last part of url
         let urlArray = window.location.pathname.split("/");
-        // get last part
         let uuid = urlArray[urlArray.length - 1];
         retrieveMarket(uuid, (e) =>
             this.setState({
@@ -25,10 +24,10 @@ class MarketDetail extends Component {
         );
     }
     getFoodsList(market) {
-        return market.foods.map((item) => (
+        return market.foods.map((item, ind) => (
             <Food
                 ls={this.ls}
-                key={item.id}
+                key={ind}
                 callback={(minusplus) =>
                     this.setState({
                         total: Math.max(
@@ -47,8 +46,10 @@ class MarketDetail extends Component {
         return (
             <div>
                 {this.props.notification}
-                <div className="section">
-                    <div className="container section box">
+                <div className="container mt-4">
+                    
+                <h1 className="has-text-centered has-text-primary is-size-1"> Market detail </h1>
+                    <div className="section box">
                         <div className="columns">
                             <p className="column auto">
                                 Shopping at{" "}
@@ -70,8 +71,8 @@ class MarketDetail extends Component {
                         </div>
                         <ul>
                             {this.state.foods &&
-                                this.state.foods.map((food) => (
-                                    <li key={food.id}>{food}</li>
+                                this.state.foods.map((food, ind) => (
+                                    <li key={ind}>{food}</li>
                                 ))}
                         </ul>
                     </div>

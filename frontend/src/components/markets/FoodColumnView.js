@@ -9,11 +9,11 @@ class FoodColumnView extends Component {
             <>
                 <h1 className="is-size-3 has-text-primary">
                     Foods list{" "}
-                    <small>({this.props.objects.length} found)</small>
+                    <small>({this.props.objects && this.props.objects.length} found)</small>
                 </h1>
                 <ColumnView
                     cols={this.props.cols || 4}
-                    objects={this.props.objects.map((food) => {
+                    objects={this.props.objects && this.props.objects.map((food) => {
                         return <FoodCard {...food}></FoodCard>;
                     })}
                 ></ColumnView>
@@ -22,4 +22,4 @@ class FoodColumnView extends Component {
     }
 }
 
-export default withSearch(FoodColumnView, "/api/foods", []);
+export default withSearch(FoodColumnView, "/api/foods/", []);

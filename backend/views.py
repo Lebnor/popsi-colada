@@ -1,15 +1,14 @@
 from django.shortcuts import redirect, render
 from rest_framework import views, viewsets, permissions, generics
 from rest_framework.response import Response
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view
 from django.contrib.auth import login
 from django.contrib.auth import get_user_model
 
 from .forms import CustomUserCreationForm
 
-from .models import Cd, Food, Market
-from .serializers import CdSerializer, FoodSerializer, UserSerializer, MarketSerializer
-
+from .models import Cd, Favorite, Food, Market
+from .serializers import CdSerializer, FavoriteSerialier,  FoodSerializer, UserSerializer, MarketSerializer
 User = get_user_model()
 
 # Create your views here.
@@ -20,6 +19,8 @@ def register_user(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            user_favorites = Favorite(user=user, markets={}, foods={})
+            user_favorites.save()
             login(request, user)
 
             return redirect("/")
@@ -28,39 +29,132 @@ def register_user(request):
         form = CustomUserCreationForm()
     return render(request, 'backend/register.html', {'form': form})
 
+
+def list_determine_favorite(query, serializer, request):
+    response = []
+    for elem in query:
+        response.append(singular_determine_favorite(elem, serializer, request))
+    return response
+
+
+def singular_determine_favorite(query, serializer, request):
+    serializer = serializer(query, many=False)
+    obj_response = dict(serializer.data)
+    favs = Favorite.objects.get(user=request.user)
+    if str(query.uuid) in favs.foods or str(query.uuid) in favs.markets:
+        obj_response['is_favorite'] = 'true'
+   
+
+    return obj_response
+
+
 class FoodViewSet(viewsets.ViewSet):
+
     def list(self, request):
         queryset = Food.objects.all()
-        serializer = FoodSerializer(queryset, many=True)
-        return Response(serializer.data)
+        response = list_determine_favorite(queryset, FoodSerializer, request)
+        return Response(response)
 
-    def retrieve(self, request, pk=None):
-        queryset = Food.objects.get(id=pk)
-        serializer = FoodSerializer(queryset, many=False)
-        return Response(serializer.data)
+    def retrieve(self, request, pk):
+        food = Food.objects.get(uuid=pk)
+        response = singular_determine_favorite(food, FoodSerializer, request)
+        markets = MarketSerializer(food.markets, many=True).data
+        response['markets'] = markets
+        return Response(response)
 
 
 class MarketListView(generics.ListAPIView):
     queryset = Market.objects.all()
     serializer_class = MarketSerializer
 
+    def list(self, request, *args, **kwargs):
+        query = Market.objects.all()
+        response = list_determine_favorite(query, MarketSerializer, request)
+        return Response(response)
 
 
 class MarketDetailView(generics.RetrieveAPIView):
     def retrieve(self, request, uuid, *args, **kwargs):
         market = Market.objects.get(uuid=uuid)
-        serializer = MarketSerializer(market, many=False)
-        return Response(serializer.data)
+        response = singular_determine_favorite(
+            market, MarketSerializer, request)
+        return Response(response)
 
+
+class MarketViewSet(viewsets.ModelViewSet):
+    queryset = Market.objects.all()
+    serializer_class = MarketSerializer
+
+    def list(self, request):
+        queryset = Market.objects.all()
+        response = list_determine_favorite(queryset, MarketSerializer, request)
+        return Response(response)
+
+    def retrieve(self, request, pk=None):
+        market = Market.objects.get(uuid=pk)
+        response = singular_determine_favorite(
+            market, MarketSerializer, request)
+        foods = []
+        foods = FoodSerializer(market.food_set, many=True)
+        response['foods'] = foods.data
+        return Response(response)
+
+
+class FavoriteViewSet(viewsets.ModelViewSet):
+    queryset = Favorite.objects.all()
+    serializer_class = FavoriteSerialier
+
+    def retrieve(self, request, *args, **kwargs):
+        favorite = Favorite.objects.get(user=request.user)
+        favorite = FavoriteSerialier(favorite, many=False)
+        return Response(favorite.data)
+
+
+@api_view(['GET'])
+def favorites_self(request):
+    favorite = Favorite.objects.get(user=request.user)
+    markets = Market.objects.filter(uuid__in=favorite.markets)
+    markets = MarketSerializer(markets, many=True).data
+    foods = Food.objects.filter(uuid__in=favorite.foods)
+    foods = FoodSerializer(foods, many=True).data
+    return Response({'foods': foods, 'markets': markets})
+
+
+
+
+@api_view(['PUT'])
+def add_favorite_food(request, uuid):
+    response = {}
+    favorites = Favorite.objects.get(user=request.user)
+    if uuid in favorites.foods:
+        favorites.foods.pop(uuid, None)
+    else:
+        favorites.foods[uuid] = True
+    favorites.save()
+    return Response(response)
+
+
+@api_view(['PUT'])
+def add_favorite_market(request, uuid):
+    response = {}
+    favorites = Favorite.objects.get(user=request.user)
+    if uuid in favorites.markets:
+        favorites.markets.pop(uuid, None)
+    else:
+        favorites.markets[uuid] = True
+    favorites.save()
+    return Response(response)
+
+@api_view(['GET', 'POST'])
+def get_current_user(request):
+    user = UserSerializer(request.user, many=False).data
+    return Response(user)
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-    def list(self, request, *args, **kwargs):
-        queryset = request.user
-        serializer = UserSerializer(queryset, many=False)
-        return Response(serializer.data)
+    
 
 
 class CdViewSet(viewsets.ModelViewSet):

@@ -57,7 +57,13 @@ const MyNavBar = ({ loggedIn, userdetails }) => {
                     >
                         Browse
                     </NavLink>
-
+                    <NavLink
+                        className="navbar-item"
+                        activeClassName="is-active"
+                        to="/favorite"
+                    >
+                        Favorites
+                    </NavLink>
                     <NavLink
                         className="navbar-item"
                         activeClassName="is-active"
@@ -74,7 +80,7 @@ const MyNavBar = ({ loggedIn, userdetails }) => {
 
                             {!loggedIn && (
                                 <a
-                                    href="/api/register"
+                                    href="/api/register/"
                                     className="button is-success"
                                 >
                                     Register
@@ -83,7 +89,7 @@ const MyNavBar = ({ loggedIn, userdetails }) => {
 
                             {!loggedIn && (
                                 <a
-                                    href="/api/login"
+                                    href="/api/login/"
                                     className="button is-light"
                                 >
                                     {" "}

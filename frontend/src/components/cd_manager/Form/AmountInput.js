@@ -6,7 +6,7 @@ class AmountInput extends Component {
         const {cls, onChange} = this.props
         return (
             <div>
-                <input type="number" className={cls} onChange={onChange}></input>
+                <input value={this.props.value} type="number" className={cls} onChange={onChange}></input>
             </div>
         );
     }

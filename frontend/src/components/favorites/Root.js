@@ -16,7 +16,7 @@ class Root extends Component {
     }
 
     componentDidMount() {
-        if (this.props.loggedIn === "true") {
+        if ( String(this.props.loggedIn) === "true") {
             retrieveFavorites((objects) => {
                 this.setState({ objects: objects });
             });

@@ -40,9 +40,10 @@ def list_determine_favorite(query, serializer, request):
 def singular_determine_favorite(query, serializer, request):
     serializer = serializer(query, many=False)
     obj_response = dict(serializer.data)
-    favs = Favorite.objects.get(user=request.user)
-    if str(query.uuid) in favs.foods or str(query.uuid) in favs.markets:
-        obj_response['is_favorite'] = 'true'
+    if request.user.is_authenticated:
+        favs = Favorite.objects.get(user=request.user)
+        if str(query.uuid) in favs.foods or str(query.uuid) in favs.markets:
+            obj_response['is_favorite'] = 'true'
    
 
     return obj_response
@@ -112,6 +113,8 @@ class FavoriteViewSet(viewsets.ModelViewSet):
 
 @api_view(['GET'])
 def favorites_self(request):
+    if not request.user.is_authenticated:
+        return Response({'foods': {}, 'markets': {}})
     favorite = Favorite.objects.get(user=request.user)
     markets = Market.objects.filter(uuid__in=favorite.markets)
     markets = MarketSerializer(markets, many=True).data
@@ -147,6 +150,8 @@ def add_favorite_market(request, uuid):
 
 @api_view(['GET', 'POST'])
 def get_current_user(request):
+    if not request.user.is_authenticated:
+        return Response({})
     user = UserSerializer(request.user, many=False).data
     return Response(user)
 

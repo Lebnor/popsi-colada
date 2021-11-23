@@ -37,7 +37,7 @@ class App extends Component {
                             />
                         </Route>
                         <Route path="/favorite">
-                            <Root />
+                            <Root {...this.props} />
                         </Route>
                         <Route path="/market-detail/:uuid">
                             <MarketDetail
@@ -76,7 +76,9 @@ fetch("/api/current-user/")
     .then((res) => {
         render(<App userdetails={res.username} loggedIn={true} />, loggedIn);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => 
+    render(<App userdetails={" "} loggedIn={false} />, notLoggedIn)
+    )
 
 if (loggedIn) {
     render(<App loggedIn={true} />, loggedIn);

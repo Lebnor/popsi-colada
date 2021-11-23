@@ -3,6 +3,7 @@ import ColumnView from "../markets/ColumnView";
 import FoodCard from "../markets/FoodCard";
 import FoodColumnView from "../markets/FoodColumnView";
 import MarketCard from "../markets/MarketCard";
+import SuggestLogin from "../SuggestLogin";
 import { retrieveFavorites } from "../utils";
 
 class Root extends Component {
@@ -15,19 +16,30 @@ class Root extends Component {
     }
 
     componentDidMount() {
-        retrieveFavorites((objects) => {
-            this.setState({ objects: objects });
-        });
+        if (this.props.loggedIn === "true") {
+            retrieveFavorites((objects) => {
+                this.setState({ objects: objects });
+            });
+        }
     }
 
     render() {
         const objects = this.state.objects;
+        if (String(this.props.loggedIn) === "false") {
+            return (
+                <div className="has-text-centered mt-4">
+                    <SuggestLogin />
+                </div>
+            );
+        }
 
         return (
             <>
                 {objects.markets && objects.markets.length > 0 && (
                     <div className="container mt-4">
-                        <h1 className="text-center has-text-primary is-size-3">Your favorite markets</h1>
+                        <h1 className="text-center has-text-primary is-size-3">
+                            Your favorite markets
+                        </h1>
                         <ColumnView
                             cols={4}
                             objects={this.state.objects.markets.map(
@@ -48,7 +60,9 @@ class Root extends Component {
                 )}
                 {objects.foods && objects.foods.length > 0 && (
                     <div className="container">
-                        <h1 className="text-center has-text-primary is-size-3">Your favorite foods:</h1>
+                        <h1 className="text-center has-text-primary is-size-3">
+                            Your favorite foods:
+                        </h1>
                         <ColumnView
                             cols={4}
                             objects={this.state.objects.foods.map((food) => {

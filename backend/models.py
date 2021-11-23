@@ -14,9 +14,6 @@ class User(AbstractUser):
 
 
 class Favoritable(models.Model):
-    is_favorite = models.BooleanField(default=False)
-    user = models.ForeignKey(User,unique=False, default=None,blank=True, null=True, on_delete=models.CASCADE)
-
 
     class Meta:
         abstract = True

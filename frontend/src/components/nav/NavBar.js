@@ -73,7 +73,7 @@ const MyNavBar = ({ loggedIn, userdetails }) => {
                     </NavLink>
                 </div>
 
-                <div className="column is-offset-5 navbar-end">
+                <div className="column is-2 is-offset-1 navbar-end">
                     <div className="navbar-item">
                         <div className="buttons is-justify-content-center">
                             <ProfileIcon loggedIn={loggedIn} userdetails={userdetails} />

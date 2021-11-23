@@ -7,9 +7,9 @@ class SuggestLogin extends Component {
             <div>
                 <p>
                     You need to
-                    <a to="/api/login/"> Login </a>
+                    <a href="/api/login/"> Login </a>
                     or
-                    <a to="/api/register/"> register </a>
+                    <a href="/api/register/"> register </a>
                     to view this page
                 </p>
             </div>

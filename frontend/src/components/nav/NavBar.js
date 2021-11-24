@@ -73,10 +73,13 @@ const MyNavBar = ({ loggedIn, userdetails }) => {
                     </NavLink>
                 </div>
 
-                <div className="column is-2 is-offset-1 navbar-end">
+                <div className="">
                     <div className="navbar-item">
-                        <div className="buttons is-justify-content-center">
-                            <ProfileIcon loggedIn={loggedIn} userdetails={userdetails} />
+                        <div className="buttons">
+                            <ProfileIcon
+                                loggedIn={loggedIn}
+                                userdetails={userdetails}
+                            />
 
                             {!loggedIn && (
                                 <a
@@ -92,8 +95,7 @@ const MyNavBar = ({ loggedIn, userdetails }) => {
                                     href="/api/login/"
                                     className="button is-light"
                                 >
-                                    {" "}
-                                    Log In{" "}
+                                    Log In
                                 </a>
                             )}
                             {loggedIn && (
@@ -101,7 +103,6 @@ const MyNavBar = ({ loggedIn, userdetails }) => {
                                     href="/api/logout"
                                     className="button is-light"
                                 >
-                                    {" "}
                                     Log Out
                                 </a>
                             )}
@@ -113,140 +114,6 @@ const MyNavBar = ({ loggedIn, userdetails }) => {
     );
 };
 
-class NavBar extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            activeInd: this.props.activeInd,
-        };
-    }
-
-    getLinkClass(ind) {
-        let linkClass = "navbar-item ";
-        if (ind === "" && window.location.pathname === "/") {
-            linkClass += " is-active";
-        }
-
-        if (ind !== "" && window.location.pathname.startsWith(`/${ind}`)) {
-            linkClass += " is-active";
-        }
-
-        return linkClass;
-    }
-
-    render() {
-        return (
-            <nav
-                className="navbar is-narrow"
-                role="navigation"
-                aria-label="main navigation"
-            >
-                <div className="column is-offset-1 is-quarter navbar-brand nav-img ">
-                    <a className="is-narrow" href="/">
-                        <img
-                            className=""
-                            width="220px"
-                            height="77px"
-                            src="../static/popsi colada.jpg"
-                            alt="brand logo"
-                        />
-                    </a>
-
-                    <a
-                        role="button"
-                        className="navbar-burger has-text-white is-narrow nav-btn"
-                        aria-label="menu"
-                        aria-expanded="false"
-                        data-target="navbarBasicExample"
-                    >
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                    </a>
-                </div>
-
-                <div
-                    id="navbarBasicExample"
-                    className="navbar-menu has-text-centered is-align-items-center"
-                >
-                    <div className="navbar-start">
-                        <Link
-                            onClick={() =>
-                                this.setState({
-                                    activeInd: 0,
-                                })
-                            }
-                            className={this.getLinkClass("")}
-                            to="/"
-                        >
-                            Home
-                        </Link>
-                        <Link
-                            onClick={() =>
-                                this.setState({
-                                    activeInd: 2,
-                                })
-                            }
-                            className={this.getLinkClass("market")}
-                            to="/markets"
-                        >
-                            Markets
-                        </Link>
-
-                        <Link
-                            onClick={() =>
-                                this.setState({
-                                    activeInd: 1,
-                                })
-                            }
-                            className={this.getLinkClass("cds")}
-                            to="/cds"
-                        >
-                            CD's
-                        </Link>
-                    </div>
-
-                    <div className="column is-offset-5 navbar-end">
-                        <div className="navbar-item">
-                            <div className="buttons is-justify-content-center">
-                                <ProfileIcon {...this.props} />
-
-                                {!this.props.loggedIn && (
-                                    <a
-                                        href="/api/register"
-                                        className="button is-success"
-                                    >
-                                        Register
-                                    </a>
-                                )}
-
-                                {!this.props.loggedIn && (
-                                    <a
-                                        href="/api/login"
-                                        className="button is-light"
-                                    >
-                                        {" "}
-                                        Log In{" "}
-                                    </a>
-                                )}
-                                {this.props.loggedIn && (
-                                    <a
-                                        href="/api/logout"
-                                        className="button is-light"
-                                    >
-                                        {" "}
-                                        Log Out
-                                    </a>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        );
-    }
-}
 document.addEventListener("DOMContentLoaded", () => {
     // Get all "navbar-burger" elements
     const $navbarBurgers = Array.prototype.slice.call(
